@@ -1,0 +1,41 @@
+[0.286s] Invoking command in '/home/dt/MultiAgentSys/py_pubsub': PYTHONPATH=/home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/py_pubsub build --build-base /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build install --prefix /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub --record /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/install.log --single-version-externally-managed
+[0.544s] running egg_info
+[0.544s] creating build/py_pubsub/py_pubsub.egg-info
+[0.544s] writing build/py_pubsub/py_pubsub.egg-info/PKG-INFO
+[0.545s] writing dependency_links to build/py_pubsub/py_pubsub.egg-info/dependency_links.txt
+[0.545s] writing entry points to build/py_pubsub/py_pubsub.egg-info/entry_points.txt
+[0.545s] writing requirements to build/py_pubsub/py_pubsub.egg-info/requires.txt
+[0.545s] writing top-level names to build/py_pubsub/py_pubsub.egg-info/top_level.txt
+[0.546s] writing manifest file 'build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.570s] reading manifest file 'build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.571s] writing manifest file 'build/py_pubsub/py_pubsub.egg-info/SOURCES.txt'
+[0.571s] running build
+[0.571s] running build_py
+[0.571s] creating /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build
+[0.571s] creating /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib
+[0.571s] creating /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub
+[0.572s] copying py_pubsub/subscriber_member_function.py -> /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub
+[0.572s] copying py_pubsub/publisher_member_function.py -> /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub
+[0.572s] copying py_pubsub/__init__.py -> /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub
+[0.572s] running install
+[0.572s] running install_lib
+[0.572s] creating /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.572s] copying /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub/subscriber_member_function.py -> /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.572s] copying /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub/publisher_member_function.py -> /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.572s] copying /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build/lib/py_pubsub/__init__.py -> /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub
+[0.573s] byte-compiling /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub/subscriber_member_function.py to subscriber_member_function.cpython-36.pyc
+[0.573s] byte-compiling /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub/publisher_member_function.py to publisher_member_function.cpython-36.pyc
+[0.573s] byte-compiling /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub/__init__.py to __init__.cpython-36.pyc
+[0.573s] running install_data
+[0.574s] creating /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/share/ament_index
+[0.574s] creating /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/share/ament_index/resource_index
+[0.574s] creating /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/share/ament_index/resource_index/packages
+[0.574s] copying resource/py_pubsub -> /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/share/ament_index/resource_index/packages
+[0.574s] copying package.xml -> /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/share/py_pubsub
+[0.574s] running install_egg_info
+[0.575s] Copying build/py_pubsub/py_pubsub.egg-info to /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages/py_pubsub-0.0.0-py3.6.egg-info
+[0.576s] running install_scripts
+[0.590s] Installing listener script to /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/py_pubsub
+[0.590s] Installing talker script to /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/py_pubsub
+[0.590s] writing list of installed files to '/home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/install.log'
+[0.607s] Invoked command in '/home/dt/MultiAgentSys/py_pubsub' returned '0': PYTHONPATH=/home/dt/MultiAgentSys/py_pubsub/install/py_pubsub/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/py_pubsub build --build-base /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/build install --prefix /home/dt/MultiAgentSys/py_pubsub/install/py_pubsub --record /home/dt/MultiAgentSys/py_pubsub/build/py_pubsub/install.log --single-version-externally-managed

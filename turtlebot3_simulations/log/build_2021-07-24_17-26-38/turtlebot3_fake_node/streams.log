@@ -1,0 +1,79 @@
+[0.021s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_teleop:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example:/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake /home/dt/MultiAgentSys/turtlebot3_simulations/turtlebot3_fake_node -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node
+[0.104s] -- The C compiler identification is GNU 7.5.0
+[0.195s] -- The CXX compiler identification is GNU 7.5.0
+[0.213s] -- Check for working C compiler: /usr/bin/cc
+[0.311s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.314s] -- Detecting C compiler ABI info
+[0.375s] -- Detecting C compiler ABI info - done
+[0.403s] -- Detecting C compile features
+[0.610s] -- Detecting C compile features - done
+[0.625s] -- Check for working CXX compiler: /usr/bin/c++
+[0.695s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.697s] -- Detecting CXX compiler ABI info
+[0.768s] -- Detecting CXX compiler ABI info - done
+[0.794s] -- Detecting CXX compile features
+[1.257s] -- Detecting CXX compile features - done
+[1.263s] -- Found ament_cmake: 0.8.3 (/opt/ros/eloquent/share/ament_cmake/cmake)
+[1.321s] -- Found PythonInterp: /home/dt/miniconda3/bin/python3 (found suitable version "3.7.7", minimum required is "3") 
+[1.321s] -- Using PYTHON_EXECUTABLE: /home/dt/miniconda3/bin/python3
+[1.503s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.574s] -- Found geometry_msgs: 0.8.1 (/opt/ros/eloquent/share/geometry_msgs/cmake)
+[1.638s] -- Found rosidl_adapter: 0.8.3 (/opt/ros/eloquent/share/rosidl_adapter/cmake)
+[1.834s] -- Found nav_msgs: 0.8.1 (/opt/ros/eloquent/share/nav_msgs/cmake)
+[1.884s] -- Found rclcpp: 0.8.5 (/opt/ros/eloquent/share/rclcpp/cmake)
+[1.949s] -- Found rmw_implementation_cmake: 0.8.1 (/opt/ros/eloquent/share/rmw_implementation_cmake/cmake)
+[1.957s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.960s] -- Looking for pthread.h
+[2.017s] -- Looking for pthread.h - found
+[2.018s] -- Looking for pthread_create
+[2.086s] -- Looking for pthread_create - not found
+[2.086s] -- Looking for pthread_create in pthreads
+[2.140s] -- Looking for pthread_create in pthreads - not found
+[2.140s] -- Looking for pthread_create in pthread
+[2.204s] -- Looking for pthread_create in pthread - found
+[2.208s] -- Found Threads: TRUE  
+[2.366s] -- Found sensor_msgs: 0.8.1 (/opt/ros/eloquent/share/sensor_msgs/cmake)
+[2.416s] -- Found tf2: 0.12.6 (/opt/ros/eloquent/share/tf2/cmake)
+[2.433s] -- Found tf2_msgs: 0.12.6 (/opt/ros/eloquent/share/tf2_msgs/cmake)
+[2.546s] -- Found turtlebot3_msgs: 2.2.1 (/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs/share/turtlebot3_msgs/cmake)
+[3.213s] -- Configuring done
+[3.240s] -- Generating done
+[3.245s] -- Build files have been written to: /home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node
+[3.250s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_teleop:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example:/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake /home/dt/MultiAgentSys/turtlebot3_simulations/turtlebot3_fake_node -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node
+[3.253s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_teleop:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example:/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node -- -j8 -l8
+[3.282s] [35m[1mScanning dependencies of target turtlebot3_fake_node[0m
+[3.333s] [ 50%] [32mBuilding CXX object CMakeFiles/turtlebot3_fake_node.dir/src/turtlebot3_fake_node.cpp.o[0m
+[7.403s] [100%] [32m[1mLinking CXX executable turtlebot3_fake_node[0m
+[7.676s] [100%] Built target turtlebot3_fake_node
+[7.681s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_teleop:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example:/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node -- -j8 -l8
+[7.701s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_teleop:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example:/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node --target install -- -j8 -l8
+[7.735s] [100%] Built target turtlebot3_fake_node
+[7.742s] [36mInstall the project...[0m
+[7.745s] -- Install configuration: ""
+[7.748s] -- Execute custom install script
+[7.749s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/lib/turtlebot3_fake_node/turtlebot3_fake_node
+[7.754s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/launch/rviz2.launch.py
+[7.757s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/launch/turtlebot3_fake_node.launch.py
+[7.761s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/burger.yaml
+[7.764s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/waffle.yaml
+[7.767s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/param/waffle_pi.yaml
+[7.771s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/rviz/model.rviz
+[7.776s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/include//turtlebot3_fake_node/turtlebot3_fake_node.hpp
+[7.779s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/ament_index/resource_index/package_run_dependencies/turtlebot3_fake_node
+[7.783s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/ament_index/resource_index/parent_prefix_path/turtlebot3_fake_node
+[7.787s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/ament_prefix_path.sh
+[7.791s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/ament_prefix_path.dsv
+[7.794s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/path.sh
+[7.798s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/environment/path.dsv
+[7.801s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.bash
+[7.804s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.sh
+[7.808s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.zsh
+[7.811s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/local_setup.dsv
+[7.815s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/package.dsv
+[7.818s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/ament_index/resource_index/packages/turtlebot3_fake_node
+[7.822s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/ament_cmake_export_include_directories-extras.cmake
+[7.825s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/ament_cmake_export_dependencies-extras.cmake
+[7.829s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/turtlebot3_fake_nodeConfig.cmake
+[7.832s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/cmake/turtlebot3_fake_nodeConfig-version.cmake
+[7.836s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3_simulations/install/turtlebot3_fake_node/share/turtlebot3_fake_node/package.xml
+[7.842s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_teleop:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example:/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3_simulations/build/turtlebot3_fake_node --target install -- -j8 -l8

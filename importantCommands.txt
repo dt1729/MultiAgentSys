@@ -1,0 +1,4 @@
+1. Source turtle bot directories(simulation, gazebo,teleop)
+2. ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
+3. ros2 run turtlebot3_teleop teleop_keyboard
+

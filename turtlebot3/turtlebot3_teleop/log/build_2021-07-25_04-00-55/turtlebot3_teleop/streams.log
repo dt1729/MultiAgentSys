@@ -1,0 +1,24 @@
+[0.564s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/build/turtlebot3_teleop': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop --editable --build-directory /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/build/turtlebot3_teleop/build --no-deps install_data --install-dir /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop
+[1.189s] running develop
+[1.481s] running egg_info
+[1.481s] creating turtlebot3_teleop.egg-info
+[1.481s] writing turtlebot3_teleop.egg-info/PKG-INFO
+[1.481s] writing dependency_links to turtlebot3_teleop.egg-info/dependency_links.txt
+[1.482s] writing entry points to turtlebot3_teleop.egg-info/entry_points.txt
+[1.482s] writing requirements to turtlebot3_teleop.egg-info/requires.txt
+[1.482s] writing top-level names to turtlebot3_teleop.egg-info/top_level.txt
+[1.483s] writing manifest file 'turtlebot3_teleop.egg-info/SOURCES.txt'
+[1.531s] reading manifest file 'turtlebot3_teleop.egg-info/SOURCES.txt'
+[1.533s] writing manifest file 'turtlebot3_teleop.egg-info/SOURCES.txt'
+[1.537s] running build_ext
+[1.537s] Creating /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/lib/python3.6/site-packages/turtlebot3-teleop.egg-link (link to .)
+[1.538s] Installing teleop_keyboard script to /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/lib/turtlebot3_teleop
+[1.539s] 
+[1.539s] Installed /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/build/turtlebot3_teleop
+[1.539s] running install_data
+[1.539s] creating /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/share/ament_index
+[1.539s] creating /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/share/ament_index/resource_index
+[1.539s] creating /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/share/ament_index/resource_index/packages
+[1.540s] copying resource/turtlebot3_teleop -> /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/share/ament_index/resource_index/packages
+[1.540s] copying package.xml -> /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/share/turtlebot3_teleop
+[1.639s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/build/turtlebot3_teleop' returned '0': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop --editable --build-directory /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/build/turtlebot3_teleop/build --no-deps install_data --install-dir /home/dt/MultiAgentSys/turtlebot3/turtlebot3_teleop/install/turtlebot3_teleop

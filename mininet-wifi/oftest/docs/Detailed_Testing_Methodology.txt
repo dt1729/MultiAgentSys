@@ -1,0 +1,1822 @@
+						***********  Conformance Test-suite   ****************
+						OF-Switch-1.0.0-TestCases detailed testing methodology
+
+
+
+
+
+****     Openflow protocol messages     ****
+
+
+
+1. Features Request
+
+Test Description: Check features request is implemented
+
+Test mode: Automated
+Test Title: FeaturesRequest
+Ports: I (Control Plane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Send OFPT_FEATURES_REQUEST from controller.
+b) Verify OFPT_FEATURES_REPLY is received without errors
+
+
+
+2. Configuration request
+
+Test Description: Check basic get configuration request is implemented
+
+Test mode: Automated
+Test Title: ConfigurationRequest
+Ports: I (Control Plane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send OFPT_GET_CONFIG_REQUEST
+b) Verify OFPT_GET_CONFIG_REPLY is received without errors.
+
+
+
+3. Modify State (ADD)
+
+Test Description: Check basic Flow ADD request is implemented
+
+Test mode: Automated
+Test Title: ModifyStateAdd
+Ports: 3 (1 Control Plane 2 dataplane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send OFPT_FLOW_MOD, command = OFPFC_ADD 
+b) Send ofp_table_stats request 
+c) Verify that active_count=1 in the reply
+
+
+
+
+4. Modify State (DELETE)
+
+Test Description: Check basic Flow Delete request is implemented
+
+Test mode: Automated
+Test Title: ModifyStateDelete
+Ports: 3 (1 Control Plane 2 dataplane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send OFPT_FLOW_MOD, command = OFPFC_ADD 
+b) Send ofp_table_stats request
+c) Verify that active_count=1 in the reply
+d) Send OFPT_FLOW_MOD, command = OFPFC_DELETE
+e) Send ofp_table_stats request
+f)  Verify active _count=0 in the reply
+
+
+
+5. Modify State (MODIFY)
+
+Test Description: Check basic Flow Modify request is implemented
+
+Test mode: Automated
+Test Title: ModifyStateModify
+Ports: 3 (1 Control Plane and 2 Dataplane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send  OFPT_FLOW_MOD , command = OFPFC_ADD, action A
+b) Send ofp_table_stats request, Verify  active_count=1
+c) Send OFPT_FLOW_MOD , command = OFPFC_MODIFY, action A’
+d) Send Test Packet  matching the flow
+e) Verify packet implements action A’
+
+
+
+6. Read State
+
+Test Description: Check basic Read State is implemented
+
+Test mode: Automated
+Test Title: ReadState
+Ports: 3 (1 Control Plane, 2 dataplane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send  OFPT_FLOW_MOD, command = OFPFC_ADD
+b) Create a OFPC_FLOW_STATS message and send it
+c) Verify switch replies without errors
+
+
+
+7. Send packet
+
+Test Description: Check basic Send-Packet is implemented. 
+		  Send-Packet: These are used by the controller to send packets out of a specified port on the switch.
+
+Test mode: Automated
+Test Title:  SendPacket
+Ports: 5 (1 Control Plane, 4 Dataplane) 
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send OFPT_PACKET_OUT out message from controller to switch for every dataplane port.
+b) Verify the packet appears on the each dataplane port
+c) Verify sent packet matches the received packet
+
+
+
+8. Barrier Request 
+
+Test Description: This test checks that a basic barrier request does not generate an error.
+
+Test mode: Automated
+Test Title: BarrierRequestReply
+Ports: I (Control Plane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send OFPT_BARRIER_REQUEST
+c) Verify OFPT_BARRIER_REPLY is received on the control plane.
+
+
+
+9. Packet In
+
+Test Description: Check packet_in is implemented. This test just checks that non matched dataplane packets 
+		  generate a packet_in
+
+Test mode: Automated
+Test Title: PacketIn
+Ports: 2 (1 Control Plane and 1 Dataplane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send a packet to dataplane port , without inserting a flow entry
+b) Verify a OFPT_PACKET_IN is generated on the control plane
+
+
+
+10. Hello
+
+Test Description: This test checks for basic Hello message generation with correct version field.
+
+Test mode: Automated
+Test Title:  Hello
+Ports: 1 (Control Plane)
+Initial State: Default (Clear switch state), Connection Setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send  OFPT_HELLO from controller to switch
+b) Verify switch also sends OFPT_HELLO message in response 
+c) Verify version field in the hello message is set to Openflow version 1.0.0
+
+
+
+11. Echo
+
+Test Description: This test checks for basic Echo Reply message generation with correct version field with 
+		  same transaction id.
+
+Test mode: Automated
+Test Title:  EchoWithoutBody
+Ports: 1 (Control Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send OFPT_ECHO_REQUEST from the controller side.
+b) Verify switch responds back with OFPT_ECHO_REPLY with same xid.
+c) Verify Openflow version in header is set to Openflow version 1.0.0.
+
+
+
+
+
+****     Detailed controller to switch messages     ****
+
+
+
+1. Overlap checking
+
+Test Description: Verify that if overlap check flag is set in the flow entry and an overlapping flow is 
+		  inserted then an error is generated and switch refuses flow entry
+
+Test mode: Automated
+Test Title:  OverlapChecking
+Ports: 3 (1 Control Plane 2 dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test-Notes:
+
+a) Generate Flow F1--> Wildcard All 
+b) Send ofp_table_stats request , verify active_count=1
+c) Generate overlapping flow F2 --> Wildcard All Except Ingress Port ( with flag OFPFF_CHECK_OVERLAP set)
+d) Verify that switch generates OFPT_ERROR msg.  
+   Type: OFPET_FLOW_MOD_FAILED code : OFPFMFC_OVERLAP 
+
+
+
+2. No overlap checking
+
+Test Description: Verify that without overlap check flag set, overlapping flows can be created.
+
+Test mode: Automated
+Test Title:  NoOverlapchecking
+Ports: 3 (1 Control Plane, 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Generate Flow F1--> Wildcard All.
+b) Send ofp_table_stats request , verify active_count=1
+e) Generate overlapping flow F2 --> Wildcard All Except Ingress Port ( without flag OFPFF_CHECK_OVERLAP set)
+c) Send a ofp_table_stats request, verify active_count=2
+
+
+
+3. Identical flows 
+
+Test Description: Verify that adding two identical flows overwrites the existing one and clears counters
+
+Test mode: Automated
+Test Title:  IdenticalFlows
+Ports: 3 (1 Control Plane), (2 dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Generate Flow F1.
+b) Send ofp_table_stats request , verify active_count=1
+b) Increment counters (packet_count, byte_count) by sending a packet matching flow F1.
+C) Send ofp_flow_stats request. Verify flow counters: byte_count and packet_count 
+c) Create identical flow F2
+d) Send a ofp_table_stats request, verify active_count=1
+e) Send ofp_flow_stats request. Verify flow counters: byte_count and packet_count are reset
+
+
+
+4. No table to add (Written in oftest—Need to add to conformance Test-Suites)
+
+
+
+5. Never valid port (TBD)
+
+
+
+
+6. Currently not existing port Version A and B (TBD)
+
+
+
+
+7. Emergency flow with timeout values 
+
+Test Description: Timeout values are not allowed for emergency flows
+
+Test Title: EmerFlowTimeout
+Test mode: Automated
+Ports: 3 (1 control plane, 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup 
+
+
+Test Notes:
+
+a)  Generate a flow F with OFPFF_EMERG set in flag and timeout values assigned.
+b)  Verify switch generates an OFPT_ERROR msg, Type: OFPET_FLOW_MOD_FAILED, Code OFPFMFC_BAD_EMERG_TIMEOUT
+
+
+
+8. Missing modify adds
+
+Test Description: If a modify does not match an existing flow, the flow gets added.
+
+Title: MissingModifyAdd
+Test mode: Automated
+Ports:3 (1 control plane,2 Data Plane)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Generate a flow-mod , command OFPC_MODIFY (Note: There should be no flows matching this flow_mod modify command)
+b) Send a ofp_table_stats request, verify active_count=1
+
+
+
+
+9. Modify changes action, preserves counters
+
+Test Description: A modified flow preserves counters
+
+Title: ModifyAction
+Test mode: Automated
+Ports: 4(1 control plane, 3 Dataplane)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Create a flow_mod F-1 with command OFPC_ADD, action A
+b) Send a test Packet matching the flow
+c) Send an ofp_flow_stats request, verify byte_count and packet_count
+e) Create flow_mod with command OFPC_MODIFY ,action A’ and modify action of flow F-1
+f) Send a ofp_flow_stats request, verify flow counters are preserved
+g) Send test packet, verify it implements action A’
+
+
+
+10. Strict Modify changes action, preserves counters
+
+Test Description: Strict Modify Flow also changes action preserves counters
+
+Title: StrictModifyAction
+Test mode: Automated
+Ports: 4(1 control plane, 3 Dataplane)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Create two overlapping flows: F --> Match on all, except one wildcarded (src address). Action A. Priority=100 
+   F’ --> Match on ingress_port = port [0], wildcarded rest. Action A. Priority=10
+b) Send a ofp_table_stats request, verify active_count=2
+c) Send Packet (it would have matched both the flows, since they are overlapping flows but it would match Flow-F1 as it has higher priority.)
+d) Send ofp_flow_stats request for Flow-1 and verify counters packet_count and byte_count 
+e) Create flow_mod ,command OFPC_STRICT_MODIFY,match on all except src address ,priority 100 action A’
+f) Send test packet , verify action is modified
+g) Send ofp_flow_stats request, verify counters are preserved.
+
+
+
+
+11. Delete non existing flow 
+
+Test Description: Request deletion of non-existing flow
+
+Title: DeleteNonexistingFlow
+Test mode: Automated
+Ports: 1(1 control plane)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Issue a delete command, with no flows inserted
+b) Make sure no error is generated on the control plane
+
+
+
+12. Delete flows with and without removed message
+
+Test Description: Check deletion of flows happens and generates messages as configured. i.e. if ‘Send Flow removed message’Flag 
+	          is set in the flow entry, the flow deletion of that respective flow should generate the flow removed message, 
+		  vice versa also exists 
+
+Test Title: SendFlowRem
+Test mode: Automated
+Ports: 3 (1 control plane, 2 Dataplane)
+Initial State: Connection setup, Default (clear switch state)
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Generate a flow F without OFPFF_SEND_FLOW_REM flag set
+b) Issue a delete command OFPFC_DELETE
+c) Verify that OFPT_FLOW_REMOVED message is not generated.
+c) Generate a flow F’ with OFPFF_SEND_FLOW_REM flag set
+d) Issue a delete command OFPFC_DELETE
+e) Verify that OFPT_FLOW_REMOVED message is generated
+
+
+
+13. Delete emergency flow 
+
+Test Description: Delete emergency flow and verify no message is generated.An emergency flow deletion will not generate 
+		  flow-removed messages even if ‘Send Flow removed message’ flag was set during the emergency flow entry.
+		  
+
+Title: DeleteEmerFlow
+Test mode: Automated
+Ports: 3 (1 control plane, 2 Dataplane)
+Initial State: Connection setup, Clear Switch State (default) 
+
+
+Test-Notes:
+
+a) Insert a flow with OFPFF_EMERG flag set.
+b) Delete the added flow with OFPFF_SEND_FLOW_REM flag set
+c) Test successful if no flow removed message is generated.
+
+
+
+14. Delete and verify strict and non-strict 
+
+Test Description: Delete and verify strict and non-strict behaviors
+
+This test compares the behavior of delete strict and non-strict.
+Title: StrictVsNonstrict
+Test mode: Automated
+Ports: 3 (1 control plane, 2 dataplane)
+Initial State: Connection setup, Clear Switch State
+
+
+Test-Notes:
+
+a) Insert Flow F with an exact match. 
+b) Issue Non-strict Delete command, verify F gets deleted. 
+c) Insert F with an exact Match 
+d) Issue Strict Delete Command, verify F gets deleted.
+e) Insert Flow T with match on all, except one wildcarded (say src address).  
+f) Insert another flow T' with match on ingress_port, wildcarded rest.  
+g) Issue Non-strict Delete ( match on ingress_port). Verify T+T' gets deleted. 
+h) Insert T and T' again. Issue Strict Delete (match on ingress port), verify only T' gets deleted
+i) Insert T, add Priority P (say 100) 
+j) Insert T' add priority (200). 
+k) Insert T' again add priority 300 --> T”
+l) Issue Non-Strict Delete (match on ingress port). Verify T+T’+T’’ gets deleted. 
+m) Insert T, T’, T’’ again, Issue Strict Delete (match on ingress_port) with priority = 200. Verify only T’ gets deleted
+
+
+
+15. Delete flows with constraint out_port
+
+Test Description: Delete flows filtered by action output.DELETE and DELETE STRICT commands can be optionally filtered by output port.
+		  If the out_port field contains a value other than OFPP_NONE, it introduces a constraint when matching. 
+		  This constraint is that the rule must contain an output action directed at that port.
+
+Title: Outport1
+Test mode: Automated
+Ports: 3 (1 control plane, 2 Dataplanes)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+
+Test-Notes:
+
+a) Insert a flow F  with output action = port x 
+b) Send a delete command matching flow F ,but  out_port =port y
+c) Send a table_stats request , verify no flow gets deleted i.e. active_count=1
+d) Send a delete command matching flow F ,outport = port x
+e) Send a table_stats request, verify flow F gets deleted.
+
+
+
+16. Add, modify flows with constraint output
+
+Test Description: Add, modify flows with outport set. This field is ignored by ADD, MODIFY, and MODIFY STRICT messages.
+
+Title: Outport2
+Test mode: Automated
+Ports: 4 (1 control plane, 3 Data planes)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+Test-Notes:
+
+a) Insert a flow F with action A (output --> port x) , but out_port field in the flow mod set as port y
+b) Send Table_Stats_Request, Verify Flow gets inserted. ( Flow add ignores out_port field)
+c) Modify the action in flow F , action A’ ( output -->port z ), but out_port field in the flow mod set as port y
+d) Send test packet matching the flow F 
+e) Verify packet implements action A’ (flow modify ignores out_port field)
+
+
+
+17. Verify that idle timeout is implemented
+
+Test Description: Verify that idle timeout is implemented
+
+Title: IdleTimeout
+Test mode: Automated
+Ports: 3 (1 control plane, 2 Dataplanes)
+Initial State: Connection setup, Clear Switch State
+Test-Field: Mandatory
+
+
+Test-Notes:
+
+a) Add a flow with idle timeout set and with OFPP_SEND_FLOW_REM bit set
+b) Verify flow removed message is received.
+c) Verify flow removed reason was idle_timeout
+d) Verify the duration_sec field is 1 sec 
+
+
+
+18. Verify that hard timeout is implemented
+
+Test Description: Verify that hard timeout is implemented
+
+Title: HardTimeout
+Test mode: Automated
+Ports: 3 (1 control plane, 2 Dataplanes)
+Initial State: Connection setup, Clear Switch State 
+Test-Field: Mandatory
+
+
+Test-Notes:
+
+a) Add a flow with hard timeout =1 set and with OFPP_SEND_FLOW_REM bit set
+b) Verify flow removed message is received.
+c) Verify flow removed reason was hard_timeout
+d) Verify the duration_sec field is 1 sec 
+
+
+
+19. Verify that messages are generated as expected
+
+Test Description: Verify that Flow removed messages are generated as expected
+	          /* Since “flow removed messages being generated when flag is set” is already tested in the above tests 
+                  So here, we test the vice-versa condition.*/
+
+Title: FlowTimeout
+Test mode: Automated
+Ports: 3 (1control plane, 1dataplane)
+Initial State: Connection setup, Clear Switch State 
+Test-Field: Mandatory
+
+
+Test-Notes:
+
+a)  Generate and install a flow with idle_timeout = 1 set no OFPFF_SEND_FLOW_REM flag set.
+b)  Verify no flow removed message is received.
+c)  Send table_stats_request message and verify active_count=0 
+
+
+
+
+
+***   Actions   ***
+
+
+
+1. No Action drops packet 
+
+Test Description: If no forward actions are present, the packet is dropped. 
+		
+Required Action: Drop. 
+A flow-entry with no specified action indicates that all matching packets should be dropped. 
+Test mode: Automated
+Test Title:  NoAction
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Send Flow mod message without any action specified
+b) Send N packets matching the flow 
+c) Verify packets are not received on any of the dataplane ports 
+d) Verify packets are not even sent to the controller
+
+
+
+2.  Get supported actions from switch
+
+Test Description: Get the supported actions from switch and make sanity checks.
+		  /*When connecting to the controller, a switch indicate which of the “Optional Actions” it supports*/
+
+Test mode: Automated
+Test Title:  Announcement
+Ports: 1 (Control Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+       
+
+Test Notes: 
+
+a) Send features_request .
+b) Verify response is OFPT_FEATURES_REPLY
+c) Verify reply has supported action list specified
+
+
+
+3. Forward All
+
+Test Description: Packet is sent to all dataplane ports except ingress port when output action.port = OFPP_ALL
+
+Test mode: Automated
+Test Title:  ForwardAll
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+       
+Test Notes: 
+
+a) Install a flow with output action.port = OFPP_ALL.
+b) Verify packets are forwarded to all ports except ingress port.
+
+
+
+4. Forward Controller 
+
+Test Description: Packet is sent to controller output.port = OFPP_CONTROLLER
+
+Test mode: Automated
+Test Title:  ForwardController
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+       
+Test Notes: 
+
+a) Insert a flow with action output port = OFPP_CONTROLLER
+b) Send packets matching the flow
+c) Verify packet received on the control plane as a packet_in message
+
+
+
+5. Forward Local (TBD – Verification of packet being received at local networking stack)
+
+Test Description: Packet is sent to switch’s local networking stack if output.port = OFPP_LOCAL
+
+Test mode: Automated
+Test Title:  ForwardLocal
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+       
+Test Notes: 
+
+a) Insert a flow with action output port = OFPP_LOCAL
+b) Send packets matching the flow
+c) Verify packet received in the switch’s local networking stack.
+
+
+
+6. Forward Table
+
+Test Description: Perform actions in flow table. Only for packet-out messages.
+		  /*If the output action.port in the packetout message = OFP.TABLE, then the packet implements the action 
+		  specified in the matching flow of the FLOW-TABLE*/
+
+Test mode: Automated
+Test Title:  ForwardTable
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+Test Notes: 
+
+a) Insert a flow F with action output.port = egress_port
+b) Send a OFPT_PACKET_OUT message with out port=OFPP_TABLE matching flow F 
+c) Verify packet received on egress_port (i.e packetout message implemented the action specified in the matching flow of the Table)
+
+
+
+7. Forward In Port
+
+Test Description: Packet is sent to input port if output.port = OFPP_INPORT
+
+Test mode: Automated
+Test Title:  ForwardInport
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+Test Notes: 
+
+a) Insert a flow with action output port = OFPP_INPORT
+b) Send packets matching the flow
+c) Verify packet received on all dataplane ports except for input port
+
+
+
+8. Forward Flood
+
+Test Description:Flood the packet along the minimum spanning tree, not including the incoming interface. 
+		 Packet is sent all the dataplane ports except the input port if output.port = OFPP_FLOOD
+
+Test mode: Automated
+Test Title:  Forward_Flood
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+Test Notes: 
+
+a) Insert a flow with action output port = OFPP_FLOOD
+b) Send packets matching the flow
+c) Verify packet received on all dataplane ports except for input port
+
+
+
+9. Multiple Ports -- TBD
+
+
+
+
+10. Forward Enqueue --- TBD
+
+
+
+
+11. Set VLAN Id
+
+Test Description: Attach VLAN ID to untagged packet.
+                  If no VLAN is present, a new header is added with the specified VLAN ID and priority of zero.
+
+Test mode: Automated
+Test Title:  AddVlanId
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_VLAN_VID , vlan_vid = x 
+b) Send packet (length = 100 bytes) matching the flow
+b)   Verify packet received has vlan id added to it. (I.e length of packet with vid is 104 bytes, dl_vlan_enable = True, dl_vlan= x, dl_vlan_pcp=0)  
+   
+
+
+12. Modify VLAN Id
+
+Test Description: Modifies Vlan Tag for a tagged packet
+		  If a VLAN header already exists, the VLAN ID is replaced with the specified value
+
+Test mode: Automated
+Test Title:  ModifyVlanId
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+
+Test Notes: 
+a) Insert a flow with action = OFPAT_SET_VLAN_VID , vlan_vid = x 
+b)   Send packet (length = 100 bytes) matching the flow
+c)   Verify packet received has vlan id rewritten. (I.e length of 104 bytes, dl_vlan_enable = True, dl_vlan=x)  
+
+
+
+13. Add VLAN Priority to an untagged packet
+
+Test Description: Attach VLAN priority to an untagged packet.
+		  Since, no VLAN ID is present; a new header is added with the specified priority and a VLAN ID of zero.\
+
+Test mode: Automated
+Test Title:  VlanPrio1
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_VLAN_PCP , dl_vlan_pcp =x
+b) Send untagged packet matching the flow  
+c) Verify packet received has vlan priority added to it along with a vid value of zero added by default   (dl_vlan_enable , dl_vlan = 0 , dl_vlan_pcp =x )
+
+
+
+14. Rewrite existing VLAN priority
+
+Test Description: Modify VLAN priority for a tagged packet.
+
+Test mode: Automated
+Test Title:  VlanPrio2
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_VLAN_PCP , dl_vlan_pcp =new_vlan_pcp
+b) Send tagged packet matching the flow  (dl_vlan = old_vlan_id , dl_vlan_pcp = old_vlan_pcp)
+c) Verify packet received has vlan id added to it. (dl_vlan_enable , dl_vlan = 0 , dl_vlan_pcp = new_vlan_pcp)
+
+
+
+
+15. Modify L2 Src Address
+
+Test Description: Modify Ethernet Src Address of a packet
+
+Test mode: Automated
+Test Title:  ModifyL2Src
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_DL_SRC , dl_src =new_dl_src
+b) Send packet matching the flow  (dl_dst = old_dl_src )
+c) Verify packet received has src address rewritten. (dl_src= new_dl_src)
+
+
+
+16. Modify L2 Destination Address
+
+Test Description: Modify Ethernet Destination Address of a packet
+
+Test mode: Automated
+Test Title:  ModifyL2Dst
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_DL_DST , dl_dst =new_dl_dst
+b) Send packet matching the flow  (dl_dst = old_dl_src )
+c) Verify packet received has destination address rewritten. (dl_src= new_dl_src)
+
+
+
+17. Strip VLAN header – (In oftest,  need to add in conformance test-suite )
+
+
+
+18. Modify L3 Src Address
+
+Test Description: Modify Network Src Address of a packet
+
+Test mode: Automated
+Test Title:  ModifyL3Src
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_NW_SRC , nw_src =new_nw_src
+b) Send packet matching the flow  (nw_src = old_nw_src )
+c) Verify packet received has nw address rewritten. (nw_src= new_nw_src)
+
+
+
+19. Modify L3 Dst Address
+
+Test Description: Modify Network Dst Address of a packet
+
+Test mode: Automated
+Test Title:  ModifyL3Dst
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_NW_DST , nw_dst =new_nw_dst
+b) Send packet matching the flow  (nw_dst = old_nw_dst )
+c) Verify packet received has nw destination address rewritten. (nw_dst= new_nw_dst)
+
+
+
+20. Modify L4 Src Address
+
+Test Description: Modify TCP Source Port of a packet
+
+Test mode: Automated
+Test Title:  ModifyL4Src
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_TP_SRC , tcp_sport =new_tcp_sport
+b) Send packet matching the flow  (tcp_sport = old_tcp_sport )
+c) Verify packet received has tcp source port rewritten. (tcp_sport = new_tcp_sport)
+
+
+21. Modify L4 Dst Address
+
+Test Description: Modify TCP Destination Port of a packet
+
+Test mode: Automated
+Test Title:  ModifyL4Dst
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_TP_DST , tcp_dport =new_tcp_dport
+b) Send packet matching the flow  (tcp_dport = old_tcp_dport )
+c) Verify packet received has tcp destination port rewritten. (tcp_sport = new_tcp_sport)
+
+
+
+22. Modify TOS
+
+Test Description: Modify Network Type of service
+
+Test mode: Automated
+Test Title:  ModifyTos
+Ports: 3 (1 Control Plane 2 Dataplane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+       
+Test Notes: 
+
+a) Insert a flow with action = OFPAT_SET_NW_TOS, ip_tos =new_ip_tos
+b) Send packet matching the flow  (ip_tos= old_ip_tos)
+c) Verify packet received has tcp destination port rewritten. (ip_tos= new_ip_tos)
+
+
+
+23. Order Not possible  -- TBD
+
+
+
+
+24. Sequential execution  -- TBD 
+
+
+
+
+
+****     Counters     ****
+
+
+
+1. Received Packets per Flow
+
+
+Test Description: Verify that packet_count in the Flow_Stats reply increments in accordance with the packets in flow  
+
+Test mode: Automated
+Test Tile: PktPerFlow
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow , match = ingress_port
+b) Send N packet matching the flow  i.e packets should be sent on ingress_port
+c) Send flow_stats_request for the flow 
+d) Verify packet_count = N in the flow_stats_reply
+
+
+
+2. Received Bytes per Flow
+
+
+Test Description: Verify that byte_count in the Flow_Stats reply increments in accordance with the bytes in flow  
+
+Test mode: Automated
+Test Tile: BytPerFlow
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow , match = ingress_port
+b) Send N packet matching the flow  i.e packets should be sent on ingress_port
+c) Send flow_stats_request for the flow 
+d) Verify byte_count = N*(no. of bytes in one packet) in the flow_stats_reply
+
+
+
+3. Duration in sec per Flow
+
+
+Test Description: Verify that duration_sec in the Flow_Stats reply increments in accordance with the time that flow was alive in sec 
+
+Test mode: Automated
+Test Tile: DurationPerFlow
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a any flow 
+b) Send flow_stats_request for that flow periodically after n sec intervals upto timeout of y 
+c) Verify each flow_stats_reply has duration_sec field incrementing as n , 2n , 3n .. y 
+
+
+
+4. Duration in nsec per flow
+
+
+Test Description: Verify that duration_nsec in the flow_stats repl increments in accordance with the time flow has been alive in nanoseconds 
+beyond duration_sec.
+
+Test mode: Automated
+Test Tile: DurationPerFlow
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert any flow 
+b) Send flow_stats_request periodically after n sec intervals upto timeout of y 
+c) Verify each flow_stats_reply has duration_sec field incrementing as n , 2n , 3n .. y and read out duration_nsec field ( Verification of nsec field 
+is out of scope)
+
+
+
+5. Received packets per port
+
+
+Test Description: Verify that rx_packets in the Port_Stats reply increments in accordance with the packets recieved on that port
+
+Test mode: Automated
+Test Tile: RxPktPerPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match on ingress_port
+b) Send N packets on the ingress_port 
+c) Send port_stats request for port=ingress_port
+d) Verify port_stats_reply has rx_packet=N
+
+
+
+
+6. Transmitted packets per port
+
+
+Test Description: Verify that tx_packets in the Port_Stats reply increments in accordance with the packets transmitted from a port  
+
+Test mode: Automated
+Test Tile: TxPktPerPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match on ingress_port, action output = egress_port
+b) Send N packets on the ingress_port
+c) Send port_stats request for port=ingress_port
+d) Verify port_stats_reply had tx_packets=N   
+
+
+
+7. Received Bytes per port
+
+
+Test Description: Verify that rx_bytes in the Port_Stats reply increments in accordance with the bytes recieved on a port  
+
+Test mode: Automated
+Test Tile: RxBytPerPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match on ingress_port, action output = egress_port
+b) Send N packet matching the flow  
+c) Send port_stats request for port=ingress_port
+d) Verify port_stats_reply had rx_bytes=N*(no. of bytes in a packet) 
+
+
+
+8. Transmitted Bytes per port
+
+
+Test Description: Verify that tx_bytes in the Port_Stats reply increments in accordance with the bytes transmitted from a port  
+
+Test mode: Automated
+Test Tile: TxBytPerPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match on ingress_port, action output = egress_port
+b) Send N packet matching the flow  
+c) Send port_stats request for port=ingress_port
+d) Verify port_stats_reply had tx_bytes=N*(no. of bytes in a packet) 
+
+
+
+9. Recieve Drops per port (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that rx_dropped counters in the Port_Stats reply increments in accordance with the packets dropped by RX  
+
+Test mode: Automated
+Test Tile: RxDrops
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+Test Notes :
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has rx_dropped count
+
+
+
+
+
+10. Transmit Drops per port (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that tx_dropped counters in the Port_Stats reply increments in accordance with the packets dropped by TX
+
+Test mode: Automated
+Test Tile: TxDrops
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Manadatory
+
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has tx_dropped count
+
+
+
+
+11. Recieve Errors (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that rx_errors counters in the Port_Stats reply increments in accordance with number of recieved error  
+		  This is a super-set of more specific receive errors and should be greater than or equal to the sum of all
+                  rx_*_err values.
+
+Test mode: Automated
+Test Tile: RxErrors
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has rx_errors count
+
+
+
+12. Transmit Errors (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that tx_errors counters in the Port_Stats reply increments in accordance with number of trasmit errors  
+
+Test mode: Automated
+Test Tile: TxErrors
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has tx_errors count
+
+
+
+13. Recieve Frame Errors (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that rx_frm_err counters in the Port_Stats reply increments in accordance with the number of frame alignment errors
+Test mode: Automated
+Test Tile: RxFrameErr
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has rx_frame_err count 
+
+
+
+14. Recieve Overrun Errors (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that rx_over_err counters in the Port_Stats reply increments in accordance with the number of with RX overrun
+
+Test mode: Automated
+Test Tile: RxOErr
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has rx_over_err count 
+
+
+15. CRC Errors (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that rx_crc_err counters in the Port_Stats reply increments in accordance with the number of crc errors
+
+Test mode: Automated
+Test Tile: RxCrcErr
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Manadatory
+
+
+Test Notes: 
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has rx_crc_err count 
+
+
+
+16. Collisions (TBD ---> Verification of counter incrementing correctly)
+
+
+Test Description: Verify that collisons counters in the Port_Stats reply increments in accordance with the collisions encountered by the switch
+
+Test mode: Automated
+Test Tile: Collisions
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Send port_stats request for port=ingress_port
+b) Verify port_stats reply has collisions count 
+
+
+
+17. Active Entries per Table
+
+
+Test Description: Verify that active_count in the table increments in accordance with the flows inserted in the table
+
+Test mode: Automated
+Test Tile: ActiveCount
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow 
+b) Send table_stats_request
+c) Verify active_count=1
+
+
+
+18. Packet Lookup per Table
+
+
+Test Description: Verify that lookup_count in the Table_Stats reply increments in accordance with the number of packets looked up in table
+
+Test mode: Automated
+Test Tile: LookupMatchedCount
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match on ingress_port
+b) Send N packets on ingress_port (matching the flow)
+c) Send N' packets on x port (Not matching the flow)
+d) Send table_stats_request 
+e) Verify lookup_count = N+N' 
+
+
+
+19. Packets matched per Table
+
+Test Description: Verify that matched_count in the Table_Stats reply increments in accordance with the number of packets matched with the table
+
+Test mode: Automated
+Test Tile: LookupMatchedCount
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match on ingress_port
+b) Send N packets on ingress_port (matching the flow)
+c) Send N' packets on x port (Not matching the flow)
+d) Send table_stats_request 
+e) Verify matched_count = N 
+
+
+
+
+20. Transmit Packets per Queue
+
+Test Description: Verify that tx_packets in the queue_stats reply increments in accordance with the number of transmitted packets
+
+Test mode: Automated
+Test Tile: TxPktPerQueue
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+
+Test Notes: 
+
+a) Send queue_stats request for ports=ofp.OFPP_ALL and queue_ids=ofp.OFPQ_ALL (i.e all ports and all queues)
+b) Send queue_stats request for egress_port[0] and queue_id[0] and note the tx_packets count in the reply
+c) Insert a flow entry with enqueue action , port = egress_port[0] queue_id= queue_id[0]
+d) Send packet matching the flow
+e) Send queue_stats request again, verify tx_packet count incremented 
+f) Repeat b , c , d , e for all the queue_ids configured for egress_port[0]
+h) Repeat b , c , d , e , f for all the egress_ports available
+
+
+
+
+21. Transmit Bytes per Queue
+
+Test Description: Verify that tx_bytes in the queue_stats reply increments in accordance with the number of transmitted bytes
+
+Test mode: Automated
+Test Tile: TxBytPerQueue
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+
+Test Notes: 
+
+a) Send queue_stats request for ports=ofp.OFPP_ALL and queue_ids=ofp.OFPQ_ALL (i.e all ports and all queues)
+b) Send queue_stats request for egress_port[0] and queue_id[0] and note the tx_bytes count in the reply
+c) Insert a flow entry with enqueue action , port = egress_port[0] queue_id= queue_id[0]
+d) Send packet matching the flow
+e) Send queue_stats request again, verify tx_byte count incremented 
+f) Repeat b , c , d , e for all the queue_ids configured for egress_port[0]
+h) Repeat b , c , d , e , f for all the egress_ports available
+
+
+
+22. Transmit Overrun Errors per queue (TBD ----> Verification of tx_error count being incremented correctly) 
+
+Test Description: Verify that tx_errors in the queue_stats reply increments in accordance with the number of packets dropped due to overrun.
+Test mode: Automated
+Test Tile: TxErrorPerQueue
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Optional
+
+Test Notes: 
+
+
+a) Send queue_stats request for port=egress_port and queue_ids=ofp.OFPQ_ALL
+B) send queue_stats request for egress_port and queue_id[0] (i.e first queue configured for egress_port)
+c) Verify reply has tx_errors count .
+d) Repear b , c for the all queue_ids of egress_port
+
+
+
+
+
+****     Flow matches     ****
+
+
+
+1. All Wildcard Match
+
+Test Description: Adding a Flow that matches all the possible fields
+
+Test mode: Automated
+Test Tile: AllWildcardMatch
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes:
+
+a) Insert a flow with wildcard = OFPFW_ALL (wildcard all fields), action output to egress_port
+b) Send packets with different header fields
+c) Verify all packets match the flow and implement the action specified.
+
+
+2. Single Header Field: Ingress Port
+
+Test Description: Match on Ingress Port and Wildcard rest 
+
+Test mode: Automated
+Test Tile: IngressPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = in_port (say port x), action output to egress_port
+b) Send packet on port x 
+c) Verify packet was recieved on egress_port
+d) Send packet on port y
+e) Verify PacketIn event was triggered on control plane
+
+
+
+3. Single Header Field: Ethernet Src Address
+
+Test Description: Match on Ethernet Source Address and Wildcard rest 
+
+Test mode: Automated
+Test Tile: EthernetSrcAddress
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = dl_src (say x) , action output to egress_port
+b) Send packet wth dl_src = x 
+c) Verify packet was recieved on egress_port
+d) Send packet with dl_src = y 
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+4. Single Header Field: Ethernet Dst Address
+
+Test Description: Match on Ethernet Destination Address and Wildcard rest 
+
+Test mode: Automated
+Test Tile: EthernetDstAddress
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = dl_dst (say x) , action output to egress_port
+b) Send packet wth dl_dst = x  
+c) Verify packet was recieved on egress_port
+d) Send packet with dl_dst = y 
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+5. Single Header Field: Ethernet Type 
+
+Test Description: Match on Ehternet Type and Wildcard rest 
+
+Test mode: Automated
+Test Tile: EthernetType
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = dl_type (say x) , action output to egress_port
+b) Send packet wth dl_type = x   
+c) Verify packet was recieved on egress_port
+d) Send packet with dl_type = y 
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+
+6. Single Header Field: Vlan Id
+
+Test Description: Match on Ingress Port and Wildcard rest 
+
+Test mode: Automated
+Test Tile: VlanId
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = dl_vlan (say x) , action output to egress_port
+b) Send a tagged packet with (dl_vlan_enable=True,dl_vlan = x)  
+c) Verify packet was recieved on egress_port
+d) Send another tagged packet with (dl_vlan_enable=True,dl_vlan = y )
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+
+7. Single Header Field: Vlan PCP
+
+Test Description: Match on Vlan ID Priority 
+
+Test mode: Automated
+Test Tile: VlanPcp
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = dl_vlan_pcp (say x) , action output to egress_port
+b) Send a tagged packet with (dl_vlan_enable=True, dl_vlan = * , dl_vlan_pcp = x)  
+c) Verify packet was recieved on egress_port
+b) Send a tagged packet with (dl_vlan_enable=True, dl_vlan = * , dl_vlan_pcp = y)  
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+
+
+8. Single Header Field: IP Src Address -------- > (TBD)
+
+Test Description: Match on IP Src Address and Wildcard rest 
+
+Test mode: Automated
+Test Tile: IPSrcAddress
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+
+
+9. Single Header Field: IP Dst Address -----------> (TBD)
+
+Test Description: Match on IP Dst Address and Wildcard rest 
+
+Test mode: Automated
+Test Tile: IPDstAddress
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+
+
+
+10. Single Header Field: IP protocol---------------> (TBD)
+
+Test Description: Match on IP Protocol and Wildcard rest 
+
+Test mode: Automated
+Test Tile: IPprotocol
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+
+
+
+
+11. Single Header Field: IP Tos bits
+
+Test Description: Match on IP Tos bits and Wildcard rest 
+
+Test mode: Automated
+Test Tile: IpTos
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = nw_tos (say x) , action output to egress_port
+b) Send a tcp packet with (nw_tos=x)  
+c) Verify packet was recieved on egress_port
+b) Send a tcp packet with (nw_tos = y)
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+12. Single Header Field: Transport Source Port
+
+Test Description: Match on Transport Src Port and Wildcard rest 
+
+Test mode: Automated
+Test Tile: TcpSrcPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = tp_src (say x) , action output to egress_port
+b) Send a tcp packet with (tp_src=x)  
+c) Verify packet was recieved on egress_port
+b) Send a tcp packet with tp_src= y)
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+13. Single Header Field: Transport Destination Port
+
+Test Description: Match on Transport Dst Port and Wildcard rest 
+
+Test mode: Automated
+Test Tile: TcpDstPort
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = tp_dst (say x) , action output to egress_port
+b) Send a tcp packet with (tp_dst=x)  
+c) Verify packet was recieved on egress_port
+b) Send a tcp packet with tp_dst = y)
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+
+14. Multiple Header Fields: L2
+
+
+Test Description: Match on Ethernet Type, Ethernet Source Address, Ethernet Destination Address and Wildcard rest 
+
+Test mode: Automated
+Test Tile: MultipleHeaderFieldL2
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = dl_type (say x), dl_src (say y ), dl_dst (say z), action output to egress_port
+b) Send a eth packet with dl_type (say x), dl_src (say y ), dl_dst (say z)
+c) Verify packet was recieved on egress_port
+b) Send a eth packet with dl_type (say w), dl_src (say v ), dl_dst (say f)
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+15. Multiple Header Fields: L3 ------> TBD
+
+
+
+
+16. Multiple Header Fields: L4
+
+Test Description: Match on Tcp Source Port, Tcp Destination Port
+
+Test mode: Automated
+Test Tile: MultipleHeaderFieldL4
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with match = tp_src (say x), tp_dst (say y )
+b) Send a tcp packet with tp_src (say x), tp_dst (say y )	
+c) Verify packet was recieved on egress_port
+b) Send a eth packet with tcp_src (say w), tcp_dst (say v )
+e) Verify PacketIn event was triggered on the control plane
+
+
+
+17. All Header Fields: Exact Match flows
+
+Test Description: Verify exact flow matches are possible 
+
+Test mode: Automated
+Test Tile: ExactMatch
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert a flow with exact match, action output to egress_port
+b) Send packet matching the flow  
+c) Verify packet received on egress_port
+d) Send a non-matching packet
+e) Verify PacketIn event gets triggered
+
+
+
+18. Exact Match Highest Priority
+
+Test Description: An exact match flow entry has a highest priority compared to other flow entries 
+
+Test mode: Automated
+Test Tile: ExactMatchHigh
+POrts: 4 (1 Control Plane 3 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert two overlapping flows:
+	Exact Match (prio = p )   action egress_port
+	Wildacrd All (prio = p+ ) action egress_port2
+b) Send packet matching the flows
+c) Verify packet received on egress_port 
+
+
+
+
+19. Wildcard Match Highest Priority
+
+Test Description: If Wildcard flow entries have priority associated with them.
+		  Higher priority Wildcard flow overrides the lower priroty Wildcard flow  
+
+Test mode: Automated
+Test Tile: WildcardMatchHigh
+POrts: 4 (1 Control Plane 3 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory
+
+
+Test Notes: 
+
+a) Insert two wildcarded flows :
+	Wildcard All Except ingress (prio = p ) , action = egress_port
+	Wildcard All (prio = p+ ) ,action = egress_port2
+b) Send packet matching the flows  
+c) Verify packet is recieved on egress_port2
+
+
+
+20. Fragment TCP Segments ------> TBD 
+
+Test Description: Create flow matching on tcp port number. Verify that fragmented packets always match that flow rule.
+
+Test mode: Automated
+Test Tile: FragTcpSeg
+POrts: 3 (1 Control Plane 2 Data Plane)
+Initial State: Default (Clear switch state), Connection setup
+Test-Field: Mandatory

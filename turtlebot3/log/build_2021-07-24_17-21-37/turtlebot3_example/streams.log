@@ -1,0 +1,20 @@
+[0.351s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_example': AMENT_PREFIX_PATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs CONDA_PROMPT_MODIFIER=(base) LD_LIBRARY_PATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/python3.6/site-packages:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs/lib/python3.7/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example --editable --build-directory /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_example/build --no-deps install_data --install-dir /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example
+[0.641s] running develop
+[0.871s] running egg_info
+[0.871s] writing turtlebot3_example.egg-info/PKG-INFO
+[0.871s] writing dependency_links to turtlebot3_example.egg-info/dependency_links.txt
+[0.871s] writing entry points to turtlebot3_example.egg-info/entry_points.txt
+[0.872s] writing requirements to turtlebot3_example.egg-info/requires.txt
+[0.872s] writing top-level names to turtlebot3_example.egg-info/top_level.txt
+[0.903s] reading manifest file 'turtlebot3_example.egg-info/SOURCES.txt'
+[0.904s] writing manifest file 'turtlebot3_example.egg-info/SOURCES.txt'
+[0.906s] running build_ext
+[0.906s] Creating /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/python3.6/site-packages/turtlebot3-example.egg-link (link to .)
+[0.907s] Installing turtlebot3_obstacle_detection script to /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/turtlebot3_example
+[0.907s] Installing turtlebot3_patrol_client script to /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/turtlebot3_example
+[0.907s] Installing turtlebot3_patrol_server script to /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/turtlebot3_example
+[0.907s] Installing turtlebot3_position_control script to /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/turtlebot3_example
+[0.908s] 
+[0.908s] Installed /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_example
+[0.908s] running install_data
+[0.933s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_example' returned '0': AMENT_PREFIX_PATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs CONDA_PROMPT_MODIFIER=(base) LD_LIBRARY_PATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example/lib/python3.6/site-packages:/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_msgs/lib/python3.7/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example --editable --build-directory /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_example/build --no-deps install_data --install-dir /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_example

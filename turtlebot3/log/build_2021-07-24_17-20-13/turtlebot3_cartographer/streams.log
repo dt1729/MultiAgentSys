@@ -1,0 +1,49 @@
+[0.033s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer': CMAKE_PREFIX_PATH=/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake /home/dt/MultiAgentSys/turtlebot3/turtlebot3_cartographer -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer
+[0.474s] -- The C compiler identification is GNU 7.5.0
+[0.474s] -- The CXX compiler identification is GNU 7.5.0
+[0.474s] -- Check for working C compiler: /usr/bin/cc
+[0.474s] -- Check for working C compiler: /usr/bin/cc -- works
+[0.475s] -- Detecting C compiler ABI info
+[0.475s] -- Detecting C compiler ABI info - done
+[0.512s] -- Detecting C compile features
+[0.775s] -- Detecting C compile features - done
+[0.791s] -- Check for working CXX compiler: /usr/bin/c++
+[0.903s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[0.906s] -- Detecting CXX compiler ABI info
+[0.999s] -- Detecting CXX compiler ABI info - done
+[1.030s] -- Detecting CXX compile features
+[1.490s] -- Detecting CXX compile features - done
+[1.495s] -- Found ament_cmake: 0.8.3 (/opt/ros/eloquent/share/ament_cmake/cmake)
+[1.557s] -- Found PythonInterp: /home/dt/miniconda3/bin/python3 (found suitable version "3.7.7", minimum required is "3") 
+[1.557s] -- Using PYTHON_EXECUTABLE: /home/dt/miniconda3/bin/python3
+[1.838s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[1.985s] -- Configuring done
+[1.990s] -- Generating done
+[1.993s] -- Build files have been written to: /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer
+[1.998s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer' returned '0': CMAKE_PREFIX_PATH=/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake /home/dt/MultiAgentSys/turtlebot3/turtlebot3_cartographer -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer
+[2.000s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer': CMAKE_PREFIX_PATH=/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer -- -j8 -l8
+[2.024s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer' returned '0': CMAKE_PREFIX_PATH=/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer -- -j8 -l8
+[2.047s] Invoking command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer': CMAKE_PREFIX_PATH=/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer --target install -- -j8 -l8
+[2.073s] [36mInstall the project...[0m
+[2.078s] -- Install configuration: ""
+[2.080s] -- Execute custom install script
+[2.081s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/config/turtlebot3_lds_2d.lua
+[2.086s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/launch/cartographer.launch.py
+[2.089s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/launch/occupancy_grid.launch.py
+[2.094s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/rviz/tb3_cartographer.rviz
+[2.098s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/ament_index/resource_index/package_run_dependencies/turtlebot3_cartographer
+[2.102s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/ament_index/resource_index/parent_prefix_path/turtlebot3_cartographer
+[2.106s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/environment/ament_prefix_path.sh
+[2.111s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/environment/ament_prefix_path.dsv
+[2.115s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/environment/path.sh
+[2.120s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/environment/path.dsv
+[2.125s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.bash
+[2.129s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.sh
+[2.133s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.zsh
+[2.136s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.dsv
+[2.140s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/package.dsv
+[2.162s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/ament_index/resource_index/packages/turtlebot3_cartographer
+[2.167s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/cmake/turtlebot3_cartographerConfig.cmake
+[2.172s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/cmake/turtlebot3_cartographerConfig-version.cmake
+[2.176s] -- Symlinking: /home/dt/MultiAgentSys/turtlebot3/install/turtlebot3_cartographer/share/turtlebot3_cartographer/package.xml
+[2.183s] Invoked command in '/home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer' returned '0': CMAKE_PREFIX_PATH=/home/dt/py_pubsub/install/py_pubsub:/opt/ros/eloquent CONDA_PROMPT_MODIFIER=(base) /usr/local/bin/cmake --build /home/dt/MultiAgentSys/turtlebot3/build/turtlebot3_cartographer --target install -- -j8 -l8
