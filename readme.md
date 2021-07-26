@@ -61,17 +61,17 @@ sudo util/install.sh -Wlnfv
 sudo mn --wifi 
 
 # to check the connections type the following commands in the mininet console
-nodes 
+mininet_wifi>nodes 
 #the expected output looks like:
 #   available nodes are: 
 #   ap1 c0 sta1 sta2
 #   Level 25:mininet:available nodes are: 
 #   ap1 c0 sta1 sta2
 #additionally to verify 
-links #shows connection between sta1-wlan0; sta2-wlan0
-exit
-sudo mn -c
-sudo mn --wifi --topo linear,2 #launches a network with 2 access points and 2 stations
+mininet_wifi>links #shows connection between sta1-wlan0; sta2-wlan0
+mininet_wifi>exit
+$sudo mn -c
+$sudo mn --wifi --topo linear,2 #launches a network with 2 access points and 2 stations
 ```
 A python script demoing the same command line functionality has been developed inside the mininet_wifi folder. Run the following commands to see the network being formed.
 
