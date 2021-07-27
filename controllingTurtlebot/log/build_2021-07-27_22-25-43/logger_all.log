@@ -1,0 +1,86 @@
+[0.623s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.623s] DEBUG:colcon:Parsed command line arguments: Namespace(ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f07439144a8>>, merge_install=False, metas=['./colcon.meta'], packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=8, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f07439144a8>, verb_name='build', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f0743914710>)
+[0.633s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.634s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.634s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.634s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.634s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.634s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.634s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/dt/MultiAgentSys/controllingTurtlebot'
+[0.634s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.635s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.662s] DEBUG:colcon.colcon_core.package_identification:Package '.' with type 'ros.ament_python' and name 'controllingTurtlebot'
+[0.662s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.662s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.663s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.663s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.663s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'cmake_args' from command line to 'None'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'cmake_target' from command line to 'None'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'cmake_clean_cache' from command line to 'False'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'cmake_clean_first' from command line to 'False'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'cmake_force_configure' from command line to 'False'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'ament_cmake_args' from command line to 'None'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'catkin_cmake_args' from command line to 'None'
+[0.719s] Level 5:colcon.colcon_core.verb:set package 'controllingTurtlebot' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.719s] DEBUG:colcon.colcon_core.verb:Building package 'controllingTurtlebot' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/dt/MultiAgentSys/controllingTurtlebot/build/controllingTurtlebot', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot', 'merge_install': False, 'path': '/home/dt/MultiAgentSys/controllingTurtlebot', 'symlink_install': False, 'test_result_base': None}
+[0.720s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.724s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.725s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/dt/MultiAgentSys/controllingTurtlebot' with build type 'ament_python'
+[0.725s] Level 1:colcon.colcon_core.shell:create_environment_hook('controllingTurtlebot', 'ament_prefix_path')
+[0.729s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.730s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/hook/ament_prefix_path.ps1'
+[0.731s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/hook/ament_prefix_path.dsv'
+[0.731s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/hook/ament_prefix_path.sh'
+[0.734s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.734s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.740s] DEBUG:colcon.colcon_core.shell:Ignoring prefix path '/opt/ros/eloquent'
+[1.298s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/dt/MultiAgentSys/controllingTurtlebot'
+[1.300s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.300s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.302s] DEBUG:colcon.colcon_core.shell:Ignoring prefix path '/opt/ros/eloquent'
+[1.309s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/dt/MultiAgentSys/controllingTurtlebot': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/controllingTurtlebot build --build-base /home/dt/MultiAgentSys/controllingTurtlebot/build/controllingTurtlebot/build install --prefix /home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot --record /home/dt/MultiAgentSys/controllingTurtlebot/build/controllingTurtlebot/install.log --single-version-externally-managed
+[1.963s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/dt/MultiAgentSys/controllingTurtlebot' returned '0': CONDA_PROMPT_MODIFIER=(base) PYTHONPATH=/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base build/controllingTurtlebot build --build-base /home/dt/MultiAgentSys/controllingTurtlebot/build/controllingTurtlebot/build install --prefix /home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot --record /home/dt/MultiAgentSys/controllingTurtlebot/build/controllingTurtlebot/install.log --single-version-externally-managed
+[1.968s] Level 1:colcon.colcon_core.environment:checking '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot' for CMake module files
+[1.969s] Level 1:colcon.colcon_core.environment:checking '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot' for CMake config files
+[1.970s] Level 1:colcon.colcon_core.environment:checking '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/lib'
+[1.971s] Level 1:colcon.colcon_core.environment:checking '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/bin'
+[1.971s] Level 1:colcon.colcon_core.environment:checking '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/lib/pkgconfig/controllingTurtlebot.pc'
+[1.971s] Level 1:colcon.colcon_core.environment:checking '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/lib/python3.6/site-packages'
+[1.971s] Level 1:colcon.colcon_core.shell:create_environment_hook('controllingTurtlebot', 'pythonpath')
+[1.972s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/hook/pythonpath.ps1'
+[1.973s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/hook/pythonpath.dsv'
+[1.974s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/hook/pythonpath.sh'
+[1.974s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(controllingTurtlebot)
+[1.975s] INFO:colcon.colcon_core.shell:Creating package script '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/package.ps1'
+[1.976s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/package.dsv'
+[1.977s] INFO:colcon.colcon_core.shell:Creating package script '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/package.sh'
+[1.978s] INFO:colcon.colcon_core.shell:Creating package script '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/package.bash'
+[1.979s] INFO:colcon.colcon_core.shell:Creating package script '/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/controllingTurtlebot/package.zsh'
+[1.980s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/dt/MultiAgentSys/controllingTurtlebot/install/controllingTurtlebot/share/colcon-core/packages/controllingTurtlebot)
+[1.981s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[1.981s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[1.982s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[1.982s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[1.994s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[1.994s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[1.994s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[1.999s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[2.000s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dt/MultiAgentSys/controllingTurtlebot/install/local_setup.ps1'
+[2.002s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/dt/MultiAgentSys/controllingTurtlebot/install/_local_setup_util_ps1.py'
+[2.004s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dt/MultiAgentSys/controllingTurtlebot/install/setup.ps1'
+[2.008s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dt/MultiAgentSys/controllingTurtlebot/install/local_setup.sh'
+[2.008s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/dt/MultiAgentSys/controllingTurtlebot/install/_local_setup_util_sh.py'
+[2.009s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dt/MultiAgentSys/controllingTurtlebot/install/setup.sh'
+[2.014s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dt/MultiAgentSys/controllingTurtlebot/install/local_setup.bash'
+[2.016s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dt/MultiAgentSys/controllingTurtlebot/install/setup.bash'
+[2.022s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/dt/MultiAgentSys/controllingTurtlebot/install/local_setup.zsh'
+[2.022s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/dt/MultiAgentSys/controllingTurtlebot/install/setup.zsh'
