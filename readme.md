@@ -44,7 +44,7 @@ cd controllingTurtlebot
 colcon build
 source install/setup.bash
 ros2 run controllingTurtlebot controller
-#after this check gazebo simulation the bot should be moving
+#after this check gazebo simulation the bot should be moving; video added inside the repository
 ```
 
 To run a simple publisher subscriber goto py_pubsub directory and run the following commands.
