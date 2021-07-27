@@ -12,7 +12,8 @@ if __name__ == "__main__":
     sta1 = net.addStation('sta1')
     sta2 = net.addStation('sta2')
     ap1 = net.addAccessPoint('ap1', ssid='AP')
-   #ap2 = net.addAccessPoint('ap2', ssid='AP1') uncomment this to start access point2
+    ap2 = net.addAccessPoint('ap2', ssid='AP1')
+   #uncomment ^this to start access point2
     c0 = net.addController('c0')
 
 
@@ -25,14 +26,14 @@ if __name__ == "__main__":
     net.addLink(sta2,ap1)
 
     #uncomment this to establish connections between stations and accesspoints
-    #net.addLink(sta1,ap2)
-    #net.addLink(sta1,ap2)
+    net.addLink(sta1,ap2)
+    net.addLink(sta1,ap2)
 
     #starting the network
     net.build()
     c0.start()
     ap1.start([c0])
-    #ap2.start([c0])
+    ap2.start([c0])
    
     #starting command line to visualise the network
     CLI(net)
