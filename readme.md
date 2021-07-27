@@ -38,6 +38,13 @@ ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py
 ros2 run turtlebot3_teleop teleop_keyboard
 #to navigate the turtlebot using /cmd_vel
 ros2 topic pub /cmd_vel geometry_msgs/Twist '{linear: {x: 1.0}}' -1
+
+#using controllingTurtlebot directory we can use python code
+cd controllingTurtlebot
+colcon build
+source install/setup.bash
+ros2 run controllingTurtlebot controller
+#after this check gazebo simulation the bot should be moving
 ```
 
 To run a simple publisher subscriber goto py_pubsub directory and run the following commands.
