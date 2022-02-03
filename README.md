@@ -2,7 +2,7 @@
  This repository simulates control strategies for multi-surface vehicle control using gazebo for WAM-V vehicles.
 
 ## TODOs:
-- Deploy controllers for individual USVs
+- Deploy controllers for individual USVs(PID, Robust Tube MPC)
 - Try different co-operation strategies
 - Implement networking in the system
 - Try implement localisation and mapping
