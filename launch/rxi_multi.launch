@@ -82,8 +82,8 @@
   <arg name="vrx2_sensors_enabled" default="true" />
   <arg name="wamv2_locked" default="false" />
 
-  <arg name="x1" default="-555" />
-  <arg name="y1" default="170" />
+  <arg name="x1" default="-490" />
+  <arg name="y1" default="250" />
   <arg name="z1" default="0.1" />
   <arg name="P1" default="0" />
   <arg name="R1" default="0" />
@@ -101,18 +101,18 @@
   <arg if="$(arg t_config)" name="urdf2" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
   <arg name="abc" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
 
-  <param name="$(arg namespace)/robot_description"
+  <param name="$(arg namespace2)/robot_description"
          command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf2)'
          locked:=$(arg wamv_locked)		   
          thruster_config:=$(arg thrust_config)
          vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
-         namespace:=$(arg namespace) "/>
+         namespace:=$(arg namespace2) "/>
 
   <!-- Spawn model in Gazebo -->
   <node name="spawn_model2" pkg="gazebo_ros" type="spawn_model"
         args="-x $(arg x1) -y $(arg y1) -z $(arg z1)
               -R $(arg R1) -P $(arg P1) -Y $(arg Y1)
-              -urdf -param $(arg namespace)/robot_description -model wamv"/>
+              -urdf -param $(arg namespace2)/robot_description -model wamv2"/>
 
   <!-- Set the pinger location -->
   <node name="set_pinger_position2" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
