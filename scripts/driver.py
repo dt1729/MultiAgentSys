@@ -89,17 +89,17 @@ def main():
         print("idx\n", idx, "\n")
 
         norm_steer_error = abs(PID_steer.error)/math.pi
+
+        
         if abs(PID_steer.error) < 0.01:
             left_thrst_pub.publish(speed_cmd)
             right_thrst_pub.publish(speed_cmd)
 
         if heading_cmd < 0:
-            left_thrst_pub.publish((1 )*speed_cmd)
-            # right_thrst_pub.publish(norm_steer_error*speed_cmd)
+            left_thrst_pub.publish(speed_cmd)
             left_thrst_ang_pub.publish(-heading_cmd)
         elif heading_cmd > 0:
-            right_thrst_pub.publish((1)*speed_cmd)
-            # left_thrst_pub.publish((norm_steer_error)*speed_cmd)
+            right_thrst_pub.publish(speed_cmd)
             right_thrst_ang_pub.publish(-heading_cmd)
 
 
