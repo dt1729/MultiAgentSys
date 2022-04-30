@@ -9,16 +9,16 @@ from gazebo_msgs.msg import ModelStates, LinkStates
 from matplotlib import pyplot as plt
 from controllers import PID_controller, state
 #Circular waypoints
-# waypoint = [-500.0,290]
-# waypoints = [[waypoint[0] + 10*math.cos(i), waypoint[1] + 10*math.sin(i)] for i in np.arange(0,2*math.pi,0.5)]
+waypoint = [-500.0,290]
+waypoints = [[waypoint[0] + 10*math.cos(i), waypoint[1] + 10*math.sin(i)] for i in np.arange(0,2*math.pi,0.5)]
 
 #straight Line waypoints
 
-waypoint = [[-500.0,290],[-460.0,320],[-540,300]]
-waypoints = []
-for j in range(1,len(waypoint)):
-    for i in np.arange(0,1,0.1):
-        waypoints.append([(1-i)*waypoint[j-1][0] + (i)*waypoint[j][0], (1-i)*waypoint[j-1][1] + (i)*waypoint[j][1]])
+# waypoint = [[-500.0,290],[-460.0,320],[-540,300]]
+# waypoints = []
+# for j in range(1,len(waypoint)):
+#     for i in np.arange(0,1,0.1):
+#         waypoints.append([(1-i)*waypoint[j-1][0] + (i)*waypoint[j][0], (1-i)*waypoint[j-1][1] + (i)*waypoint[j][1]])
 
 
 mystate = ModelStates()
@@ -61,7 +61,7 @@ def main():
         wamv_head = tf_conversions.transformations.euler_from_quaternion([a.pose[len(a.pose)-7].orientation.x,a.pose[len(a.pose)-7].orientation.y,a.pose[len(a.pose)-7].orientation.z,a.pose[len(a.pose)-7].orientation.w])[2]
         WAMV_pos = [a.pose[len(a.pose)-7].position.x, a.pose[len(a.pose)-7].position.y, wamv_head] 
     
-        des_speed = (0.5*math.exp(-abs(PID_steer.error)) + 0.1)
+        des_speed = (1 - 1/(1+3*math.exp(-0.6*abs(PID_steer.error))))
         # des_speed = 0.6
 
         des_head = math.atan2(waypoints[idx][1] - WAMV_pos[1], waypoints[idx][0] - WAMV_pos[0])
@@ -94,12 +94,12 @@ def main():
             right_thrst_pub.publish(speed_cmd)
 
         if heading_cmd < 0:
-            left_thrst_pub.publish((1- norm_steer_error)*speed_cmd)
-            right_thrst_pub.publish(norm_steer_error*speed_cmd)
+            left_thrst_pub.publish((1 )*speed_cmd)
+            # right_thrst_pub.publish(norm_steer_error*speed_cmd)
             left_thrst_ang_pub.publish(-heading_cmd)
         elif heading_cmd > 0:
-            right_thrst_pub.publish((1-norm_steer_error)*speed_cmd)
-            left_thrst_pub.publish((norm_steer_error)*speed_cmd)
+            right_thrst_pub.publish((1)*speed_cmd)
+            # left_thrst_pub.publish((norm_steer_error)*speed_cmd)
             right_thrst_ang_pub.publish(-heading_cmd)
 
 
