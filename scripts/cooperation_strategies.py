@@ -29,7 +29,7 @@ def main():
     A = np.array(a,dtype=Float32)
 
     # d = np.array([[-1 - (-1/(2*math.sqrt(2))),-1 - (-1/(2*math.sqrt(2)))],[1 - (1/(2*math.sqrt(2))),1 - (1/(2*math.sqrt(2)))]])
-    r = 100.0
+    r = 30.0
     r1 = 10.0
     count = 0
     d = np.array([[count+r*math.cos(math.radians(1*60)),count+r*math.sin(math.radians(1*60))],
@@ -68,6 +68,7 @@ def main():
         buffer.append(np.array([x[0], x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8]]))
         # buffer.append(np.array([x[0], x[1]]))
 
+
     for _ in range(0,1000):
         kk = []
         arr1 = leader_model(arr1,2,delta_t,math.pi/3)
@@ -76,7 +77,6 @@ def main():
             sum_2 = np.zeros_like(x[i],dtype = float)
             for j in range(0,len(A[0])):
                 sum_1 += A[i][j]*(x[i] - x[j] - (d[i] - d[j]))
-
             kk.append(-1*sum_1 + arr1)
 
         # print("X: ", x, "\n", "kk:", kk, "\n")
@@ -90,6 +90,12 @@ def main():
         x[7] = x[7] + delta_t*kk[7]
         x[8] = x[8] + delta_t*kk[8]
         buffer.append(np.array([x[0], x[1],x[2],x[3],x[4],x[5],x[6],x[7],x[8]]))
+
+    # Transform code 
+    for i in range(len(buffer)):
+        for j in range(len(buffer[0])):
+            buffer[i][j][0] += -880
+            buffer[i][j][1] += 450
 
 
     buff_1_x = [buffer[i][0][0] for i in range(len(buffer))] 
@@ -112,25 +118,26 @@ def main():
     buff_9_y = [buffer[i][8][1] for i in range(len(buffer))] 
 
     print(x)   
-    # plt.plot(buff_1_x,buff_1_y,)
-    # plt.plot(buff_2_x,buff_2_y,)
-    # plt.plot(buff_3_x,buff_3_y,)
-    # plt.plot(buff_4_x,buff_4_y,)
-    # plt.plot(buff_5_x,buff_5_y,)
-    # plt.plot(buff_6_x,buff_6_y,)
-    # plt.plot(buff_7_x,buff_7_y,)
-    # plt.plot(buff_8_x,buff_8_y,)
-    # plt.plot(buff_9_x,buff_9_y,)
-
-    plt.plot(buff_1_x[len(buff_1_x)-1],buff_1_y[len(buff_1_y)-1],"*")
-    plt.plot(buff_2_x[len(buff_2_x)-1],buff_2_y[len(buff_2_y)-1],"*")
-    plt.plot(buff_3_x[len(buff_1_x)-1],buff_3_y[len(buff_1_x)-1],"*")
-    plt.plot(buff_4_x[len(buff_1_x)-1],buff_4_y[len(buff_1_x)-1],"*")
-    plt.plot(buff_5_x[len(buff_1_x)-1],buff_5_y[len(buff_1_x)-1],"*")
-    plt.plot(buff_6_x[len(buff_1_x)-1],buff_6_y[len(buff_1_x)-1],"*")
-    plt.plot(buff_7_x[len(buff_1_x)-1],buff_7_y[len(buff_1_x)-1],"*")
-    plt.plot(buff_8_x[len(buff_1_x)-1],buff_8_y[len(buff_1_x)-1],"*")
-    plt.plot(buff_9_x[len(buff_1_x)-1],buff_9_y[len(buff_1_x)-1],"*")
+    plt.plot(buff_1_x,buff_1_y,)
+    plt.plot(buff_2_x,buff_2_y,)
+    plt.plot(buff_3_x,buff_3_y,)
+    plt.plot(buff_4_x,buff_4_y,)
+    plt.plot(buff_5_x,buff_5_y,)
+    plt.plot(buff_6_x,buff_6_y,)
+    plt.plot(buff_7_x,buff_7_y,)
+    plt.plot(buff_8_x,buff_8_y,)
+    plt.plot(buff_9_x,buff_9_y,)
+    
+    return buffer
+    # plt.plot(buff_1_x[len(buff_1_x)-1],buff_1_y[len(buff_1_y)-1],"*")
+    # plt.plot(buff_2_x[len(buff_2_x)-1],buff_2_y[len(buff_2_y)-1],"*")
+    # plt.plot(buff_3_x[len(buff_1_x)-1],buff_3_y[len(buff_1_x)-1],"*")
+    # plt.plot(buff_4_x[len(buff_1_x)-1],buff_4_y[len(buff_1_x)-1],"*")
+    # plt.plot(buff_5_x[len(buff_1_x)-1],buff_5_y[len(buff_1_x)-1],"*")
+    # plt.plot(buff_6_x[len(buff_1_x)-1],buff_6_y[len(buff_1_x)-1],"*")
+    # plt.plot(buff_7_x[len(buff_1_x)-1],buff_7_y[len(buff_1_x)-1],"*")
+    # plt.plot(buff_8_x[len(buff_1_x)-1],buff_8_y[len(buff_1_x)-1],"*")
+    # plt.plot(buff_9_x[len(buff_1_x)-1],buff_9_y[len(buff_1_x)-1],"*")
     plt.show()
 
 

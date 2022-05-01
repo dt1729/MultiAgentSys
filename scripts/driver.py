@@ -1,5 +1,6 @@
 from re import L
 import time
+from markupsafe import string
 import numpy as np
 import math
 import rospy
@@ -20,6 +21,24 @@ waypoints = [[waypoint[0] + 10*math.cos(i), waypoint[1] + 10*math.sin(i)] for i 
 #     for i in np.arange(0,1,0.1):
 #         waypoints.append([(1-i)*waypoint[j-1][0] + (i)*waypoint[j][0], (1-i)*waypoint[j-1][1] + (i)*waypoint[j][1]])
 
+class WAMV_pub:
+    def __init__(self,wamv_name) -> None:
+        self.left_thrust = 0.0
+        self.right_thrust = 0.0
+        self.left_thrust_ang = 0.0
+        self.right_thrust_ang = 0.0
+        self.name = wamv_name
+
+    def pub(self,left_thrust_val,right_thrust_val,left_thrust_orient, right_thrust_orient):
+        left_thrst_pub = rospy.Publisher("/"+self.name+'/thrusters/left_thrust_cmd',Float32,queue_size=10)
+        right_thrst_pub = rospy.Publisher("/"+self.name+'/thrusters/right_thrust_cmd',Float32,queue_size=10)
+        left_thrst_ang_pub = rospy.Publisher("/"+self.name+'/thrusters/left_thrust_angle',Float32,queue_size=10)
+        right_thrst_ang_pub = rospy.Publisher("/"+self.name+'/thrusters/right_thrust_angle',Float32,queue_size=10)
+
+        left_thrst_pub.publish(left_thrust_val)
+        right_thrst_pub.publish(right_thrust_val)
+        left_thrst_ang_pub.publish(left_thrust_orient)
+        right_thrst_ang_pub.publish(right_thrust_orient)
 
 mystate = ModelStates()
 rospy.init_node('Waypoint_tracking', anonymous=True)
@@ -49,20 +68,53 @@ def main():
     curr_head_arr = []
     t_arr = []
     t,t_prev = time.time(), time.time()
+    wamv2_pub =WAMV_pub("wamv2")
 
-    while idx < len(waypoints):    
-        a = rospy.wait_for_message("/gazebo/link_states",LinkStates)
-        left_thrst_pub = rospy.Publisher('/wamv2/thrusters/left_thrust_cmd',Float32,queue_size=10)
-        right_thrst_pub = rospy.Publisher('/wamv2/thrusters/right_thrust_cmd',Float32,queue_size=10)
-
-        left_thrst_ang_pub = rospy.Publisher('/wamv2/thrusters/left_thrust_angle',Float32,queue_size=10)
-        right_thrst_ang_pub = rospy.Publisher('/wamv2/thrusters/right_thrust_angle',Float32,queue_size=10)
+    while idx < len(waypoints):
+        a = rospy.wait_for_message("/gazebo/link_states",LinkStates)        
+        if idx == len(waypoints)-1:
+            wamv_head = tf_conversions.transformations.euler_from_quaternion([a.pose[len(a.pose)-7].orientation.x,a.pose[len(a.pose)-7].orientation.y,a.pose[len(a.pose)-7].orientation.z,a.pose[len(a.pose)-7].orientation.w])[2]
+            WAMV_pos = [a.pose[len(a.pose)-7].position.x, a.pose[len(a.pose)-7].position.y, wamv_head] 
         
+            des_speed = (1 - 1/(1+3*math.exp(-0.6*abs(PID_steer.error))))
+
+            des_head = math.atan2(waypoints[idx][1] - WAMV_pos[1], waypoints[idx][0] - WAMV_pos[0])
+            curr_head = WAMV_pos[2]
+            if len(pos_y) == 0:
+                speed_val = 0.0
+            else:
+                speed_val = np.hypot(pos_y[len(pos_y)-1] - WAMV_pos[1], pos_x[len(pos_x)-1] - WAMV_pos[0])/(time.time()-t_prev)
+                t_prev = time.time()
+
+            pos_x.append(WAMV_pos[0])
+            pos_y.append(WAMV_pos[1])
+            des_head_arr.append(des_head)
+            curr_head_arr.append(curr_head)
+            t_arr.append(time.time() - t)
+
+            heading_cmd = PID_steer.PID(0.1, 0.000, 0.001, des_head,curr_head, speed=False,angle=True)
+            speed_cmd = PID_speed.PID(10.0,10,0.2,des_speed,speed_val,speed=True,angle=False)
+            print("\nSteer PID:\t",PID_steer.error,curr_head,"\n")
+            print("Speed PID:\t",PID_speed.error,speed_cmd,"\n")
+            print("WAMV Pos:\t",WAMV_pos[0], WAMV_pos[1], "\n")
+            print("WAMV heading:\t",des_head, wamv_head, "\n")
+            print("WAMV Speed:\t",des_speed, speed_val, "\n")
+            print("idx\n", idx, "\n")
+
+            if abs(PID_steer.error) < 0.01:
+                wamv2_pub.pub(speed_cmd,speed_cmd,0.0,0.0)
+
+            if heading_cmd < 0:
+                wamv2_pub.pub(speed_cmd,0.0,-heading_cmd,0.0)
+
+            elif heading_cmd > 0:
+                wamv2_pub.pub(0.0,speed_cmd,-heading_cmd,0.0)
+
+
         wamv_head = tf_conversions.transformations.euler_from_quaternion([a.pose[len(a.pose)-7].orientation.x,a.pose[len(a.pose)-7].orientation.y,a.pose[len(a.pose)-7].orientation.z,a.pose[len(a.pose)-7].orientation.w])[2]
         WAMV_pos = [a.pose[len(a.pose)-7].position.x, a.pose[len(a.pose)-7].position.y, wamv_head] 
     
         des_speed = (1 - 1/(1+3*math.exp(-0.6*abs(PID_steer.error))))
-        # des_speed = 0.6
 
         des_head = math.atan2(waypoints[idx][1] - WAMV_pos[1], waypoints[idx][0] - WAMV_pos[0])
         curr_head = WAMV_pos[2]
@@ -92,17 +144,13 @@ def main():
 
         
         if abs(PID_steer.error) < 0.01:
-            left_thrst_pub.publish(speed_cmd)
-            right_thrst_pub.publish(speed_cmd)
+            wamv2_pub.pub(speed_cmd,speed_cmd,0.0,0.0)
 
         if heading_cmd < 0:
-            left_thrst_pub.publish(speed_cmd)
-            left_thrst_ang_pub.publish(-heading_cmd)
+            wamv2_pub.pub(speed_cmd,0.0,-heading_cmd,0.0)
+
         elif heading_cmd > 0:
-            right_thrst_pub.publish(speed_cmd)
-            right_thrst_ang_pub.publish(-heading_cmd)
-
-
+            wamv2_pub.pub(0.0,speed_cmd,-heading_cmd,0.0)
 
         if np.hypot(WAMV_pos[0] - waypoints[idx][0], WAMV_pos[1] - waypoints[idx][1]) < 5:
             idx += 1

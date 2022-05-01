@@ -75,6 +75,8 @@
   </node>
   <node name="pinger_visualization" pkg="vrx_gazebo" type="pinger_visualization.py" />
 
+
+
   <arg name="namespace2" default="wamv2"/>
   <arg name="thrust_config2" default="T" />
 
@@ -99,7 +101,7 @@
 
   <!-- For now - can only use the T configuration! -->
   <arg if="$(arg t_config)" name="urdf2" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
-  <arg name="abc" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+  <arg name="abc1" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
 
   <param name="$(arg namespace2)/robot_description"
          command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf2)'
@@ -120,5 +122,323 @@
   </node>
   <node name="pinger_visualization2" pkg="vrx_gazebo" type="pinger_visualization.py" />
 
+  <arg name="namespace3" default="wamv3"/>
+  <arg name="thrust_config3" default="T" />
+
+  <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx3_sensors_enabled" default="true" />
+  <arg name="wamv3_locked" default="false" />
+
+  <arg name="x3" default="-488" />
+  <arg name="y3" default="240" />
+  <arg name="z3" default="0.1" />
+  <arg name="P3" default="0" />
+  <arg name="R3" default="0" />
+  <arg name="Y3" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf3" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc2" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace3)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf3)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace3) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model3" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x3) -y $(arg y3) -z $(arg z3)
+              -R $(arg R3) -P $(arg P3) -Y $(arg Y3)
+              -urdf -param $(arg namespace3)/robot_description -model wamv3"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position3" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization3" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+  <arg name="namespace4" default="wamv4"/>
+  <arg name="thrust_config4" default="T" />
+
+  <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx4_sensors_enabled" default="true" />
+  <arg name="wamv4_locked" default="false" />
+
+  <arg name="x4" default="-450" />
+  <arg name="y4" default="240" />
+  <arg name="z4" default="0.1" />
+  <arg name="P4" default="0" />
+  <arg name="R4" default="0" />
+  <arg name="Y4" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf4" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc3" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace4)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf4)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace4) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model4" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x4) -y $(arg y4) -z $(arg z4)
+              -R $(arg R4) -P $(arg P4) -Y $(arg Y4)
+              -urdf -param $(arg namespace4)/robot_description -model wamv4"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position4" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization4" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+
+  <arg name="namespace5" default="wamv5"/>
+  <arg name="thrust_config5" default="T" />
+
+  <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx5_sensors_enabled" default="true" />
+  <arg name="wamv5_locked" default="false" />
+
+  <arg name="x5" default="-480" />
+  <arg name="y5" default="245" />
+  <arg name="z5" default="0.1" />
+  <arg name="P5" default="0" />
+  <arg name="R5" default="0" />
+  <arg name="Y5" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf5" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc4" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace5)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf5)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace5) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model5" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x5) -y $(arg y5) -z $(arg z5)
+              -R $(arg R5) -P $(arg P5) -Y $(arg Y5)
+              -urdf -param $(arg namespace5)/robot_description -model wamv5"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position5" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization5" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+   <arg name="namespace6" default="wamv6"/>
+  <arg name="thrust_config6" default="T" />
+
+  <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx6_sensors_enabled" default="true" />
+  <arg name="wamv6_locked" default="false" />
+
+  <arg name="x6" default="-470" />
+  <arg name="y6" default="245" />
+  <arg name="z6" default="0.1" />
+  <arg name="P6" default="0" />
+  <arg name="R6" default="0" />
+  <arg name="Y6" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf6" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc5" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace6)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf6)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace6) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model6" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x6) -y $(arg y6) -z $(arg z6)
+              -R $(arg R6) -P $(arg P6) -Y $(arg Y6)
+              -urdf -param $(arg namespace6)/robot_description -model wamv6"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position6" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization6" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+
+   <arg name="namespace7" default="wamv7"/>
+  <arg name="thrust_config7" default="T" />
+
+  <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx7_sensors_enabled" default="true" />
+  <arg name="wamv7_locked" default="false" />
+
+  <arg name="x7" default="-400" />
+  <arg name="y7" default="290" />
+  <arg name="z7" default="0.1" />
+  <arg name="P7" default="0" />
+  <arg name="R7" default="0" />
+  <arg name="Y7" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf7" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc6" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace7)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf7)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace7) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model7" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x7) -y $(arg y7) -z $(arg z7)
+              -R $(arg R7) -P $(arg P7) -Y $(arg Y7)
+              -urdf -param $(arg namespace7)/robot_description -model wamv7"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position7" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization7" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+
+  <arg name="namespace8" default="wamv8"/>
+  <arg name="thrust_config8" default="T" />
+
+
+  <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx8_sensors_enabled" default="true" />
+  <arg name="wamv8_locked" default="false" />
+
+  <arg name="x8" default="-450" />
+  <arg name="y8" default="295" />
+  <arg name="z8" default="0.1" />
+  <arg name="P8" default="0" />
+  <arg name="R8" default="0" />
+  <arg name="Y8" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf8" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc7" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace8)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf8)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace8) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model8" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x8) -y $(arg y8) -z $(arg z8)
+              -R $(arg R8) -P $(arg P8) -Y $(arg Y8)
+              -urdf -param $(arg namespace8)/robot_description -model wamv8"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position8" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization8" pkg="vrx_gazebo" type="pinger_visualization.py" />
+
+  <arg name="namespace9" default="wamv9"/>
+  <arg name="thrust_config9" default="T" />
+
+    <!-- Do we load the VRX sensor suite? -->
+  <arg name="vrx9_sensors_enabled" default="true" />
+  <arg name="wamv9_locked" default="false" />
+
+  <arg name="x9" default="-455" />
+  <arg name="y9" default="295" />
+  <arg name="z9" default="0.1" />
+  <arg name="P9" default="0" />
+  <arg name="R9" default="0" />
+  <arg name="Y9" default="1" />
+
+
+
+  <!-- Load robot model -->
+  <!-- Determine which model -->
+  <!-- <arg name="h_config" value="$(eval int((thrust_config)=='H'))"/>
+  <arg name="t_config" value="$(eval int((thrust_config)=='T'))"/>
+  <arg name="x_config" value="$(eval int((thrust_config)=='X'))"/> -->
+
+  <!-- For now - can only use the T configuration! -->
+  <arg if="$(arg t_config)" name="urdf9" default="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf.xacro"/>
+  <arg name="abc8" value="$(find wamv_gazebo)/urdf/wamv_gazebo.urdf"/>
+
+  <param name="$(arg namespace9)/robot_description"
+         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf9)'
+         locked:=$(arg wamv_locked)		   
+         thruster_config:=$(arg thrust_config)
+         vrx_sensors_enabled:=$(arg vrx_sensors_enabled)
+         namespace:=$(arg namespace9) "/>
+
+  <!-- Spawn model in Gazebo -->
+  <node name="spawn_model9" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x9) -y $(arg y9) -z $(arg z9)
+              -R $(arg R9) -P $(arg P9) -Y $(arg Y9)
+              -urdf -param $(arg namespace9)/robot_description -model wamv9"/>
+
+  <!-- Set the pinger location -->
+  <node name="set_pinger_position9" pkg="vrx_gazebo" type="set_pinger_position.py" output="screen">
+  <rosparam command="load" file="$(arg pinger_params)"/>
+  </node>
+  <node name="pinger_visualization9" pkg="vrx_gazebo" type="pinger_visualization.py" />
 
 </launch>
