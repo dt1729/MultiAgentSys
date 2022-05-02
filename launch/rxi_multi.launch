@@ -19,12 +19,12 @@
   <arg name="pinger_params" default="$(find vrx_gazebo)/config/pinger.yaml"/>
 
   <!-- Initial USV location and attitude-->
-  <arg name="x" default="-532" />
-  <arg name="y" default="162" />
+  <arg name="x" default="-990" />
+  <arg name="y" default="450" />
   <arg name="z" default="0.1" />
   <arg name="P" default="0" />
   <arg name="R" default="0" />
-  <arg name="Y" default="1" />
+  <arg name="Y" default="-0.6" />
 
   <!-- Allow user specified thruster configurations
        H = stern trusters on each hull
@@ -84,12 +84,12 @@
   <arg name="vrx2_sensors_enabled" default="true" />
   <arg name="wamv2_locked" default="false" />
 
-  <arg name="x1" default="-490" />
-  <arg name="y1" default="250" />
+  <arg name="x1" default="-960" />
+  <arg name="y1" default="490" />
   <arg name="z1" default="0.1" />
   <arg name="P1" default="0" />
   <arg name="R1" default="0" />
-  <arg name="Y1" default="1" />
+  <arg name="Y1" default="-0.6" />
 
 
 
@@ -129,12 +129,12 @@
   <arg name="vrx3_sensors_enabled" default="true" />
   <arg name="wamv3_locked" default="false" />
 
-  <arg name="x3" default="-488" />
-  <arg name="y3" default="240" />
+  <arg name="x3" default="-990" />
+  <arg name="y3" default="440" />
   <arg name="z3" default="0.1" />
   <arg name="P3" default="0" />
   <arg name="R3" default="0" />
-  <arg name="Y3" default="1" />
+  <arg name="Y3" default="-0.6" />
 
 
 
@@ -174,12 +174,12 @@
   <arg name="vrx4_sensors_enabled" default="true" />
   <arg name="wamv4_locked" default="false" />
 
-  <arg name="x4" default="-450" />
-  <arg name="y4" default="240" />
+  <arg name="x4" default="-910" />
+  <arg name="y4" default="410" />
   <arg name="z4" default="0.1" />
   <arg name="P4" default="0" />
   <arg name="R4" default="0" />
-  <arg name="Y4" default="1" />
+  <arg name="Y4" default="-0.6" />
 
 
 
@@ -220,12 +220,12 @@
   <arg name="vrx5_sensors_enabled" default="true" />
   <arg name="wamv5_locked" default="false" />
 
-  <arg name="x5" default="-480" />
-  <arg name="y5" default="245" />
+  <arg name="x5" default="-990" />
+  <arg name="y5" default="500" />
   <arg name="z5" default="0.1" />
   <arg name="P5" default="0" />
   <arg name="R5" default="0" />
-  <arg name="Y5" default="1" />
+  <arg name="Y5" default="-0.6" />
 
 
 
@@ -265,12 +265,12 @@
   <arg name="vrx6_sensors_enabled" default="true" />
   <arg name="wamv6_locked" default="false" />
 
-  <arg name="x6" default="-470" />
-  <arg name="y6" default="245" />
+  <arg name="x6" default="-950" />
+  <arg name="y6" default="510" />
   <arg name="z6" default="0.1" />
   <arg name="P6" default="0" />
   <arg name="R6" default="0" />
-  <arg name="Y6" default="1" />
+  <arg name="Y6" default="-0.6" />
 
 
 
@@ -311,12 +311,12 @@
   <arg name="vrx7_sensors_enabled" default="true" />
   <arg name="wamv7_locked" default="false" />
 
-  <arg name="x7" default="-400" />
-  <arg name="y7" default="290" />
+  <arg name="x7" default="-970" />
+  <arg name="y7" default="390" />
   <arg name="z7" default="0.1" />
   <arg name="P7" default="0" />
   <arg name="R7" default="0" />
-  <arg name="Y7" default="1" />
+  <arg name="Y7" default="-0.6" />
 
 
 
@@ -358,12 +358,12 @@
   <arg name="vrx8_sensors_enabled" default="true" />
   <arg name="wamv8_locked" default="false" />
 
-  <arg name="x8" default="-450" />
-  <arg name="y8" default="295" />
+  <arg name="x8" default="-940" />
+  <arg name="y8" default="410" />
   <arg name="z8" default="0.1" />
   <arg name="P8" default="0" />
   <arg name="R8" default="0" />
-  <arg name="Y8" default="1" />
+  <arg name="Y8" default="-0.6" />
 
 
 
@@ -403,12 +403,12 @@
   <arg name="vrx9_sensors_enabled" default="true" />
   <arg name="wamv9_locked" default="false" />
 
-  <arg name="x9" default="-455" />
-  <arg name="y9" default="295" />
+  <arg name="x9" default="-995" />
+  <arg name="y9" default="475" />
   <arg name="z9" default="0.1" />
   <arg name="P9" default="0" />
   <arg name="R9" default="0" />
-  <arg name="Y9" default="1" />
+  <arg name="Y9" default="-0.6" />
 
 
 

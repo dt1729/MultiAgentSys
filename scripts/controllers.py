@@ -34,7 +34,6 @@ class PID_controller:
 
         a = Kp*self.error + Ki*(self.error_sum) + Kd*error_diff
         if speed:
-            print("a: ",a)
             if a > self.saturation:
                 a = self.saturation
                 self.error_sum = 0
@@ -43,7 +42,6 @@ class PID_controller:
                 
         if angle:
             if abs(a) > self.saturation:
-                print("here")
                 self.error_sum = 0
                 if a > 0:
                     a = self.saturation

@@ -10,12 +10,12 @@ from gazebo_msgs.msg import ModelStates
 from std_msgs.msg import Float32
 
 def leader_model(prev_pos,v,deltaT,theta_m):
-    curr_pos = np.array([0.0,0.0])
+    curr_pos = prev_pos
     curr_pos[0] = prev_pos[0] + (v)*deltaT*math.cos(theta_m)
     curr_pos[1] = prev_pos[1] + (v)*deltaT*math.sin(theta_m)
     return curr_pos
 
-def main():
+def consensus(ini_pos,prev_leader_pos):
     a = [[0,1,1,1,1,1,1,1,1],
         [1,0,1,1,1,1,1,1,1],
         [1,1,0,1,1,1,1,1,1],
@@ -32,6 +32,7 @@ def main():
     r = 30.0
     r1 = 10.0
     count = 0
+
     d = np.array([[count+r*math.cos(math.radians(1*60)),count+r*math.sin(math.radians(1*60))],
                   [count+r*math.cos(math.radians(120)),count+r*math.sin(math.radians(120))],
                   [count+r1*math.cos(math.radians(90)),count+r1*math.sin(math.radians(90))],
@@ -41,10 +42,11 @@ def main():
                   [count+r*math.cos(math.radians(300)),count+r*math.sin(math.radians(300))],
                   [count+r*math.cos(math.radians(360)),count+r*math.sin(math.radians(360))],
                   [count+r1*math.cos(math.radians(330)),count+r1*math.sin(math.radians(330))]])
-    x = np.array([[-4.5,0.0],[-3.5,-0.0],[-2.5,-0.0],[-1.5,-0.0],[-0.5,-0.0],[0.5,-0.0],[1.5,-0.0],[2.5,-0.0],[3.5,-0.0]])
+
+    x = np.array([[0.0,0.0],[0.0,0.0],[0.0,0.0],[0.0,0.0],[0.0,0.0],[0.0,0.0],[0.0,0.0],[0.0,0.0],[0.0,0.0]])
     buffer = []
     delta_t = 0.01
-    arr1 = np.mean(d,axis=0)
+    arr1 = prev_leader_pos
     for _ in range(0,1000):
         kk = []
         for i in range(0,len(A)):
@@ -52,7 +54,6 @@ def main():
             sum_2 = np.zeros_like(x[i],dtype = float)
             for j in range(0,len(A[0])):
                 sum_1 += A[i][j]*(x[i] - x[j] - (d[i] - d[j]))
-
             kk.append(-1*sum_1)
 
         # print("X: ", x, "\n", "kk:", kk, "\n")
@@ -69,9 +70,9 @@ def main():
         # buffer.append(np.array([x[0], x[1]]))
 
 
-    for _ in range(0,1000):
+    for _ in range(0,200):
         kk = []
-        arr1 = leader_model(arr1,2,delta_t,math.pi/3)
+        arr1 = leader_model(prev_leader_pos,1,delta_t,math.pi/3)
         for i in range(0,len(A)):
             sum_1 = np.zeros_like(x[i],dtype = float)
             sum_2 = np.zeros_like(x[i],dtype = float)
@@ -94,9 +95,12 @@ def main():
     # Transform code 
     for i in range(len(buffer)):
         for j in range(len(buffer[0])):
-            buffer[i][j][0] += -880
-            buffer[i][j][1] += 450
+            buffer[i][j][0] += ini_pos[0]
+            buffer[i][j][1] += ini_pos[1]
 
+
+
+    consensus_op = [buffer[len(buffer)-1][j] for j in range(0,9)]
 
     buff_1_x = [buffer[i][0][0] for i in range(len(buffer))] 
     buff_1_y = [buffer[i][0][1] for i in range(len(buffer))] 
@@ -117,7 +121,7 @@ def main():
     buff_9_x = [buffer[i][8][0] for i in range(len(buffer))] 
     buff_9_y = [buffer[i][8][1] for i in range(len(buffer))] 
 
-    print(x)   
+
     plt.plot(buff_1_x,buff_1_y,)
     plt.plot(buff_2_x,buff_2_y,)
     plt.plot(buff_3_x,buff_3_y,)
@@ -127,8 +131,8 @@ def main():
     plt.plot(buff_7_x,buff_7_y,)
     plt.plot(buff_8_x,buff_8_y,)
     plt.plot(buff_9_x,buff_9_y,)
-    
-    return buffer
+
+
     # plt.plot(buff_1_x[len(buff_1_x)-1],buff_1_y[len(buff_1_y)-1],"*")
     # plt.plot(buff_2_x[len(buff_2_x)-1],buff_2_y[len(buff_2_y)-1],"*")
     # plt.plot(buff_3_x[len(buff_1_x)-1],buff_3_y[len(buff_1_x)-1],"*")
@@ -138,7 +142,11 @@ def main():
     # plt.plot(buff_7_x[len(buff_1_x)-1],buff_7_y[len(buff_1_x)-1],"*")
     # plt.plot(buff_8_x[len(buff_1_x)-1],buff_8_y[len(buff_1_x)-1],"*")
     # plt.plot(buff_9_x[len(buff_1_x)-1],buff_9_y[len(buff_1_x)-1],"*")
-    plt.show()
+    # plt.show()
+    return consensus_op,arr1
 
 
-main()
+# arr = [0.0,0.0]
+# for i in range(0,10):
+#     pos = np.array([-880.0,250.0])
+#     _,arr = consensus(pos,arr)
